@@ -2,36 +2,36 @@
 
 ![SearchParty_en-us](https://github.com/0xSickb0y/SearchParty/assets/148525929/f2bdf931-cc06-4837-bbff-fe213aa3dcc6)
 
-## Intro ##
- _SearchParty_ is a tool developed as part of the [FIAP](https://www.fiap.com.br) Challenge project for the 2023 mid-year Cyber-Defense classes.
+## Intro
 
-Its primary purpose is to find personal and sensitive data within the file system.
+_**SearchParty**_ é uma ferramenta desenvolvida como parte do projeto [FIAP](http://www.fiap.com.br) Challenge para as turmas de Defesa Cibernética de meio de ano em 2023.
+
+Seu objetivo principal é encontrar dados pessoais e sensíveis no sistema de arquivos.
 
 ## Description
 
-The tool iterates over the provided input, categorizing files based on their MIME types. Each type is organized into a list for further processing.
+A ferramenta itera sobre a entrada fornecida, categorizando os arquivos com base em seus tipos MIME. Cada tipo é organizado em uma lista para processamento posterior.
 
-Subsequently, an extraction method is initiated for each file type, with each method representing a member of a _Search Party_.
+Em seguida, um método de extração é iniciado para cada tipo de arquivo, com cada método representando um membro de uma _Equipe de Busca_.
 
-The extraction methods use regular expressions and keywords to examine the text extracted from the files, searching for matches with the supported data types.
+Os métodos de extração usam expressões regulares e palavras-chave para examinar o texto extraído dos arquivos, procurando correspondências com os tipos de dados suportados.
 
-During program execution, the data is mapped, and upon completion, the user receives a comprehensive mapping of its location, available in database format, text files, or standard output.
+Durante a execução do programa, os dados são mapeados e, ao término, o usuário recebe um mapeamento compreensivo de sua localização, disponível em formato de banco de dados, arquivos de texto ou saída padrão.
 
-Additionally, the tool provides practical file management features, enabling users to copy, move, or delete files according to their analysis findings.
+Além disso, a ferramenta oferece recursos práticos de gerenciamento de arquivos, permitindo que os usuários copiem, movam ou excluam arquivos de acordo com os resultados de sua análise.
 
 ## Disclaimer
 
-SearchParty relies on the libmagic library for file type identification. On Windows systems, it is recommended to use the [python-magic-bin](https://pypi.org/project/python-magic-bin/) module, which provides a Python interface to libmagic using ctypes.
+O SearchParty depende da biblioteca libmagic para identificação de tipos de arquivo. Em sistemas Windows, é recomendado usar o módulo [python-magic-bin](https://pypi.org/project/python-magic-bin/), que oferece uma interface para libmagic usando ctypes.
 
-A requirements file has already been created for both cases:
+Um arquivo requirements.txt já foi criado para cada sistema:
 
-- For Unix-based systems: `requirements_UNIX.txt`
-- For MS-Windows: `requirements_WINDOWS.txt`
+- Para sistemas baseados em Unix: `requirements_UNIX.txt`
+- Para Microsoft Windows: `requirements_WINDOWS.txt`
 
-Please be aware that some terminal environments may not support Colorama for color formatting. If you encounter issues, use the script `SearchParty-NoColors.py`.
+Por favor, note que alguns ambientes de terminal podem não suportar o Colorama para formatação de cores. Se encontrar problemas, considere usar o script `SearchParty-NoColors.py`.
 
-
-##  Supported File Extensions
+## Extensões de arquivo suportadas
 - **.txt**: text/plain
 - **.csv**: text/csv
 - **.bmp**: image/bmp
@@ -46,32 +46,25 @@ Please be aware that some terminal environments may not support Colorama for col
 - **.pdf**: application/pdf
 - **.eml**: message/rfc822
 
-## Supported Data Types
+## Tipos de dados suportados
 - **cpf** (Cadastro de pessoa física)
 - **rg** (Registro geral)
 - **nit** (Número de identificação do trabalhador)
 - **cns** (Cartão nacional de saúde)
-- **email addresses**
-- **phone numbers**
-- **Ethnic groups**
-- **Financial information**
-- **Legal information**
-- **Medical information**
-- **Political preferences**
-- **Vehicle documents**
-- **Gender and sexual orientation**
-- **Property information**
-- **Religion and faith**
-- **Travel history**
+- **endereços de e-mail**
+- **números de telefone**
+- **Grupos étnicos**
+- **Informações financeiras**
+- **Informações legais**
+- **Informações médicas**
+- **Preferências políticas**
+- **Documentos de veículo**
+- **Gênero e orientação sexual**
+- **Informações sobre imóveis**
+- **Religião e fé**
+- **Histórico de viagens**
 
-## Usage
-
-Running the tool:
-
-    python SearchParty.py [-h] [-F $file] [-D $directory] [--find  [...]] [--loot [$name]] [--database [$sql.db]] [--data-type $type] [--file-type $type] [--copy-files $dst]
-                      [--move-files $dst] [--delete-files]
-
-## Options
+## Opções
 ```
   -h, --help            show this help message and exit
   -F $file              scan file
@@ -85,3 +78,9 @@ Running the tool:
   --move-files $dst     move files to another location
   --delete-files        delete files from the file system
 ```
+## Uso
+
+Executando a ferramenta:
+
+    python SearchParty.py [-h] [-F $file] [-D $directory] [--find  [...]] [--loot [$name]] [--database [$sql.db]] [--data-type $type] [--file-type $type] [--copy-files $dst]
+                      [--move-files $dst] [--delete-files]
