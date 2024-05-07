@@ -28,8 +28,9 @@ A requirements file has already been created for both cases:
 - For Unix-based systems: `requirements_UNIX.txt`
 - For MS-Windows: `requirements_WINDOWS.txt`
 
-Please be aware that some terminal environments may not support Colorama for color formatting. If you encounter issues, use the script `SearchParty-NoColors.py`.
+SearchParty utilizes the [Tesseract](https://github.com/tesseract-ocr/tesseract) engine for OCR analysis. Ensure that you have Tesseract installed and configured correctly on your system before using SearchParty.
 
+Please be aware that some terminal environments may not support Colorama for color formatting. If you encounter issues, use the script `SearchParty-NoColors.py`.
 
 ##  Supported File Extensions
 - **.txt**: text/plain
