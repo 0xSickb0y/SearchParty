@@ -23,10 +23,13 @@ Additionally, the tool provides practical file management features, enabling use
 
 SearchParty relies on the libmagic library for file type identification. On Windows systems, it is recommended to use the [python-magic-bin](https://pypi.org/project/python-magic-bin/) module, which provides a Python interface to libmagic using ctypes.
 
-Please note that a requirements file has already been created for both cases:
+A requirements file has already been created for both cases:
 
-- For Unix-based systems:`requirements_UNIX.txt`
+- For Unix-based systems: `requirements_UNIX.txt`
 - For MS-Windows: `requirements_WINDOWS.txt`
+
+Please be aware that some terminal environments may not support Colorama for color formatting. If you encounter issues, use the script `SearchParty-NoColors.py`.
+
 
 ##  Supported File Extensions
 - **.txt**: text/plain
