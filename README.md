@@ -19,6 +19,15 @@ During program execution, the data is mapped, and upon completion, the user rece
 
 Additionally, the tool provides practical file management features, enabling users to copy, move, or delete files according to their analysis findings.
 
+## Disclaimer
+
+SearchParty relies on the libmagic library for file type identification. On Windows systems, it is recommended to use the [python-magic-bin](https://pypi.org/project/python-magic-bin/) module, which provides a Python interface to libmagic using ctypes.
+
+Please note that a requirements file has already been created for both cases:
+
+- For Unix-based systems:`requirements_UNIX.txt`
+- For MS-Windows: `requirements_WINDOWS.txt`
+
 ##  Supported File Extensions
 - **.txt**: text/plain
 - **.csv**: text/csv
@@ -35,13 +44,12 @@ Additionally, the tool provides practical file management features, enabling use
 - **.eml**: message/rfc822
 
 ## Supported Data Types
-- **cpf**
-- **rg**
-- **cnpj**
-- **email**
-- **phone**
-- **nit**
-- **cns**
+- **cpf** (Cadastro de pessoa física)
+- **rg** (Registro geral)
+- **nit** (Número de identificação do trabalhador)
+- **cns** (Cartão nacional de saúde)
+- **email addresses**
+- **phone numbers**
 - **Ethnic groups**
 - **Financial information**
 - **Legal information**
@@ -74,5 +82,3 @@ Running the tool:
   --move-files $dst     move files to another location
   --delete-files        delete files from the file system
 ```
-## Outro
-_Project in Development..._
