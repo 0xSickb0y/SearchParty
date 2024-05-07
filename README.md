@@ -8,7 +8,7 @@ _**SearchParty**_ é uma ferramenta desenvolvida como parte do projeto [FIAP](ht
 
 Seu objetivo principal é encontrar dados pessoais e sensíveis no sistema de arquivos.
 
-## Description
+## Descrição
 
 A ferramenta itera sobre a entrada fornecida, categorizando os arquivos com base em seus tipos MIME. Cada tipo é organizado em uma lista para processamento posterior.
 
@@ -29,7 +29,7 @@ Um arquivo requirements.txt já foi criado para cada sistema:
 - Para sistemas baseados em Unix: `requirements_UNIX.txt`
 - Para Microsoft Windows: `requirements_WINDOWS.txt`
 
-Por favor, note que alguns ambientes de terminal podem não suportar o Colorama para formatação de cores. Se encontrar problemas, considere usar o script `SearchParty-NoColors.py`.
+Alguns ambientes de terminal podem não suportar o Colorama para formatação de cores. Se encontrar problemas, considere usar o script `SearchParty-NoColors.py`.
 
 ## Extensões de arquivo suportadas
 - **.txt**: text/plain
