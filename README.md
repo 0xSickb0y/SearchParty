@@ -29,7 +29,7 @@ Um arquivo requirements.txt já foi criado para cada sistema:
 - Para sistemas baseados em Unix: `requirements_UNIX.txt`
 - Para Microsoft Windows: `requirements_WINDOWS.txt`
 
-para reconhecimento óptico de caracteres (OCR), o SearchParty utiliza a engine [Tesseract](https://github.com/tesseract-ocr/tesseract) para análise OCR. Certifique-se de ter o Tesseract instalado e configurado corretamente no seu sistema antes de usar o SearchParty.
+Para reconhecimento óptico de caracteres (OCR), o SearchParty utiliza a engine [Tesseract](https://github.com/tesseract-ocr/tesseract) para análise OCR. Certifique-se de ter o Tesseract instalado e configurado corretamente no seu sistema antes de usar o SearchParty.
 
 Alguns ambientes de terminal podem não suportar o Colorama para formatação de cores. Se encontrar problemas, considere usar o script `SearchParty-NoColors.py`.
 
