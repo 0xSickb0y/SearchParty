@@ -86,3 +86,8 @@ Running the tool:
 
     python SearchParty.py [-h] [-F $file] [-D $directory] [--find  [...]] [--loot [$name]] [--database [$sql.db]] [--data-type $type] [--file-type $type] [--copy-files $dst]
                       [--move-files $dst] [--delete-files]
+
+
+## Outro
+
+A Graphical User Interface (GUI) is currently under development as an  alternative to the command-line interface (CLI). This option aims to provide a more intuitive and user-friendly experience, simplifying the process of scanning, analyzing, and managing data
