@@ -2,7 +2,8 @@
 
 '''
 https://github.com/0xSickb0y/SearchParty/
-Made By: 0xSickb0y yuriVolp
+Made By: 0xSickb0y yuriVolp MarceloCostaM
+v1.0
 '''
 
 
@@ -37,7 +38,7 @@ banner_str = r'''
 /____/\___/\__,_/_/   \___/_/ /_/  /_/    \__,_/_/   \__/\__  /
 v1.0                                                     /___/
 
-Offline tool for personal/sensitive data mapping & analytics
+Ferramenta offline para mapeamento e análise de dados pessoais/sensíveis.
 https://github.com/0xSickb0y/SearchParty/
 '''
 
@@ -51,16 +52,16 @@ def separate_args(arguments):
     return arguments.split(',')
 
 
-parser.add_argument('-F', metavar="$file", dest='file', action='append', help='scan file')
-parser.add_argument('-D', metavar="$directory", dest='directory', action='append', help='scan directory')
-parser.add_argument('--find', metavar='', dest='findme', type=str, nargs='+', help="search for specific values ('John Doe' '47.283.723-0')")
-parser.add_argument('--loot', metavar="$name", dest='loot', type=separate_args, nargs='?', const=os.getcwd(), help='save results to a directory (default: $current/loot)')
-parser.add_argument('--database', metavar='$sql.db', dest='database', type=separate_args, nargs='?', const=os.getcwd(), help='save results to a database (default: $hostname.db)')
-parser.add_argument('--data-type', metavar='$type', dest='datatype', type=separate_args, help='data types separated by comma (cpf,rg)')
-parser.add_argument('--file-type', metavar='$type', dest='filetype', type=separate_args, help='file types separated by comma (pdf,docx)')
-parser.add_argument('--copy-files', metavar='$dst', dest='copy', help='copy files to another location')
-parser.add_argument('--move-files', metavar='$dst', dest='move', help='move files to another location')
-parser.add_argument('--delete-files', dest='delete', action="store_true", help='delete files from the file system')
+parser.add_argument('-F', metavar="$file", dest='file', action='append', help='escanear arquivo')
+parser.add_argument('-D', metavar="$directory", dest='directory', action='append', help='escanear diretório')
+parser.add_argument('--find', metavar='', dest='findme', type=str, nargs='+', help="procurar valores específicos ('John Doe' '47.283.723-0')")
+parser.add_argument('--loot', metavar="$name", dest='loot', type=separate_args, nargs='?', const=os.getcwd(), help='salvar resultados em um diretório (default: $current/loot)')
+parser.add_argument('--database', metavar='$sql.db', dest='database', type=separate_args, nargs='?', const=os.getcwd(), help='salvar resultados em um banco de dados (default: $hostname.db)')
+parser.add_argument('--data-type', metavar='$type', dest='datatype', type=separate_args, help='tipos de dados separados por vírgula')
+parser.add_argument('--file-type', metavar='$type', dest='filetype', type=separate_args, help='tipos de arquivos separados por vírgula')
+parser.add_argument('--copy-files', metavar='$dst', dest='copy', help='copiar arquivos para outro local')
+parser.add_argument('--move-files', metavar='$dst', dest='move', help='mover arquivos para outro local')
+parser.add_argument('--delete-files', dest='delete', action="store_true", help='excluir arquivos do sistema de arquivos')
 
 args = parser.parse_args()
 
@@ -111,30 +112,30 @@ class SearchParty:
 
     def validate_directory_and_file_args(self):
         if not (self.args.directory or self.args.file):
-            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Fore.RESET} Error: Either {Style.BRIGHT}-D{Style.RESET_ALL} or {Style.BRIGHT}-F{Style.RESET_ALL} option must be provided.")
+            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Fore.RESET} Erro: As opções{Style.BRIGHT}-D{Style.RESET_ALL} ou {Style.BRIGHT}-F{Style.RESET_ALL} devem ser fornecidas.")
 
         if self.args.directory and self.args.file:
-            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: Both {Style.BRIGHT}-D{Style.RESET_ALL} and {Style.BRIGHT}-F{Style.RESET_ALL} options cannot be provided simultaneously.")
+            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: As opções {Style.BRIGHT}-D{Style.RESET_ALL} e {Style.BRIGHT}-F{Style.RESET_ALL} não podem ser fornecidas simultaneamente.")
 
     def validate_file_operations(self):
         if self.args.copy and (self.args.move or self.args.delete):
-            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: {Style.BRIGHT}--copy-files{Style.RESET_ALL} and ({Style.BRIGHT}--move-files{Style.RESET_ALL}, {Style.BRIGHT}--delete-files{Style.RESET_ALL}) cannot be provided simultaneously.")
+            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: {Style.BRIGHT}--copy-files{Style.RESET_ALL} e ({Style.BRIGHT}--move-files{Style.RESET_ALL}, {Style.BRIGHT}--delete-files{Style.RESET_ALL}) não podem ser fornecidos simultaneamente.")
 
         if self.args.move and (self.args.copy or self.args.delete):
-            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: {Style.BRIGHT}--move-files{Style.RESET_ALL} and ({Style.BRIGHT}--copy-files{Style.RESET_ALL}, {Style.BRIGHT}--delete-files{Style.RESET_ALL}) cannot be provided simultaneously.")
+            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: {Style.BRIGHT}--move-files{Style.RESET_ALL} e ({Style.BRIGHT}--copy-files{Style.RESET_ALL}, {Style.BRIGHT}--delete-files{Style.RESET_ALL}) não podem ser fornecidos simultaneamente.")
 
         if self.args.delete and (self.args.copy or self.args.move):
-            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: {Style.BRIGHT}--delete-files{Style.RESET_ALL} and ({Style.BRIGHT}--copy-files{Style.RESET_ALL}, {Style.BRIGHT}--move-files{Style.RESET_ALL}) cannot be provided simultaneously.")
+            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: {Style.BRIGHT}--delete-files{Style.RESET_ALL} e ({Style.BRIGHT}--copy-files{Style.RESET_ALL}, {Style.BRIGHT}--move-files{Style.RESET_ALL}) não podem ser fornecidos simultaneamente.")
 
         if self.args.delete and (self.args.loot or self.args.database):
-            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: {Style.BRIGHT}--delete-files{Style.RESET_ALL} and ({Style.BRIGHT}--loot{Style.RESET_ALL}, {Style.BRIGHT}--database{Style.RESET_ALL}) cannot be provided simultaneously.")
+            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: {Style.BRIGHT}--delete-files{Style.RESET_ALL} e ({Style.BRIGHT}--loot{Style.RESET_ALL}, {Style.BRIGHT}--database{Style.RESET_ALL}) não podem ser fornecidos simultaneamente.")
 
         if self.args.move and (self.args.loot or self.args.database):
-            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: {Style.BRIGHT}--move-files{Style.RESET_ALL} and ({Style.BRIGHT}--loot{Style.RESET_ALL}, {Style.BRIGHT}--database{Style.RESET_ALL}) cannot be provided simultaneously.")
+            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: {Style.BRIGHT}--move-files{Style.RESET_ALL} e ({Style.BRIGHT}--loot{Style.RESET_ALL}, {Style.BRIGHT}--database{Style.RESET_ALL}) não podem ser fornecidos simultaneamente.")
 
     def validate_findme_and_datatype_args(self):
         if self.args.findme and self.args.datatype:
-            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: Both {Style.BRIGHT}--find{Style.RESET_ALL} and {Style.BRIGHT}--data{Style.RESET_ALL}-type options cannot be provided simultaneously.")
+            raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: As opções {Style.BRIGHT}--find{Style.RESET_ALL} e {Style.BRIGHT}--data{Style.RESET_ALL}-type não podem ser fornecidas simultaneamente.")
 
     def validate_files(self):
         if self.args.file:
@@ -148,13 +149,13 @@ class SearchParty:
         validated_paths = set()
         for path in paths:
             if not os.access(path, os.R_OK):
-                raise PermissionError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: Cannot read {Style.BRIGHT}{path}{Style.RESET_ALL}.")
+                raise PermissionError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: Permissões insuficientes para ler {Style.BRIGHT}{path}{Style.RESET_ALL}.")
             if not os.path.exists(path):
-                raise FileNotFoundError(f'{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: {"Directory" if is_dir else "File"} {Style.BRIGHT}{path}{Style.RESET_ALL} does not exist.')
+                raise FileNotFoundError(f'{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: O {"Diretório" if is_dir else "Arquivo"} fornecido {Style.BRIGHT}{path}{Style.RESET_ALL} não existe.')
             if is_dir and os.path.isfile(path):
-                raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: Provided path {Style.BRIGHT}{path}{Style.RESET_ALL} is a file.")
+                raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: O caminho fornecido {Style.BRIGHT}{path}{Style.RESET_ALL} é um arquivo.")
             if not is_dir and os.path.isdir(path):
-                raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: Provided path {Style.BRIGHT}{path}{Style.RESET_ALL} is a directory.")
+                raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: O caminho fornecido {Style.BRIGHT}{path}{Style.RESET_ALL} é um diretório.")
             validated_paths.add(path)
         return validated_paths
 
@@ -170,7 +171,7 @@ class SearchParty:
         if platform.system().lower() in ['linux', 'linux2', 'darwin']:
             cmd = os.popen('which tesseract').read().strip()
             if not cmd:
-                raise FileNotFoundError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Unable to locate the Tesseract OCR executable.")
+                raise FileNotFoundError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Não foi possível localizar o executável do Tesseract OCR.")
             pytesseract.tesseract_cmd = cmd
         elif platform.system().lower() in ['win32', 'cygwin', 'windows']:
             default_path = os.path.join(os.environ.get('ProgramFiles', 'C:\\Program Files'), 'Tesseract-OCR\\tesseract.exe')
@@ -180,7 +181,7 @@ class SearchParty:
                 cmd = 'powershell -Command "(Get-Command -Name tesseract | Select-Object -ExpandProperty Path) -or (where.exe tesseract)"'
                 path = os.popen(cmd).read().strip()
                 if not path:
-                    raise FileNotFoundError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Unable to locate the Tesseract OCR executable.")
+                    raise FileNotFoundError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Não foi possível localizar o executável do Tesseract OCR.")
                 pytesseract.tesseract_cmd = path
 
     def validate_datatype_args(self):
@@ -188,7 +189,7 @@ class SearchParty:
             self.args.datatype = set(self.args.datatype)
             for dt in self.args.datatype:
                 if dt not in self.regex_patterns:
-                    raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: Invalid data type(s) provided: {Style.BRIGHT}{dt}{Style.RESET_ALL}")
+                    raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: Tipos de dados inválidos fornecidos: {Style.BRIGHT}{dt}{Style.RESET_ALL}")
             for key in list(self.regex_patterns.keys()):
                 if key not in self.args.datatype:
                     del self.regex_patterns[key]
@@ -198,7 +199,7 @@ class SearchParty:
             self.args.filetype = set(self.args.filetype)
             for ft in self.args.filetype:
                 if ft not in self.file_patterns:
-                    raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: Invalid file type(s) provided: {Style.BRIGHT}{ft}{Style.RESET_ALL}")
+                    raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: Tipos de arquivo inválidos fornecidos: {Style.BRIGHT}{ft}{Style.RESET_ALL}")
             for key in list(self.file_patterns.keys()):
                 if key not in self.args.filetype:
                     del self.file_patterns[key]
@@ -206,20 +207,20 @@ class SearchParty:
     def validate_loot(self):
         if self.args.loot:
             if len(self.args.loot) > 1:
-                raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: {Style.BRIGHT}--loot{Style.RESET_ALL} argument cannot have multiple values.")
+                raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: O argumento {Style.BRIGHT}--loot{Style.RESET_ALL} não pode ter vários valores.")
             else:
                 self.args.loot = os.path.abspath(self.args.loot[0])
                 if os.access(self.args.loot, os.W_OK):
                     if os.path.exists(f'{self.args.loot}/loot'):
-                        raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: {Style.BRIGHT}{f'{self.args.loot}/loot'}{Style.RESET_ALL} already exists")
+                        raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: {Style.BRIGHT}{f'{self.args.loot}/loot'}{Style.RESET_ALL} já existe")
                     self.args.loot = f'{self.args.loot}/loot'
                 else:
-                    raise PermissionError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: cannot write to {Style.BRIGHT}{self.args.loot}{Style.RESET_ALL}")
+                    raise PermissionError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: Permissões insuficientes para escrever em {Style.BRIGHT}{self.args.loot}{Style.RESET_ALL}")
 
     def validate_database(self):
         if self.args.database:
             if len(self.args.database) > 1:
-                raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: {Style.BRIGHT}--database{Style.RESET_ALL} argument cannot have multiple values.")
+                raise ValueError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: O argumento {Style.BRIGHT}--database{Style.RESET_ALL} não pode ter vários valores.")
             else:
                 self.args.database = os.path.abspath(self.args.database[0])
                 if self.args.database != os.getcwd():
@@ -232,25 +233,25 @@ class SearchParty:
                     self.args.database = os.path.join(db_path, db_name)
                 if os.access(db_path, os.W_OK):
                     if os.path.exists(db_name):
-                        raise FileExistsError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: {Style.BRIGHT}{os.path.abspath(self.args.database)}{Style.RESET_ALL} already exists")
+                        raise FileExistsError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: {Style.BRIGHT}{os.path.abspath(self.args.database)}{Style.RESET_ALL} já existe")
                 else:
-                    raise PermissionError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: Cannot write to {Style.BRIGHT}{db_path}{Style.RESET_ALL}")
+                    raise PermissionError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro:Permissões insuficientes para escrever em {Style.BRIGHT}{db_path}{Style.RESET_ALL}")
 
     def validate_copy(self):
         if self.args.copy:
             if os.path.exists(self.args.copy):
                 if not os.access(self.args.copy, os.W_OK):
-                    raise PermissionError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: Cannot write to {Style.BRIGHT}{self.args.copy}{Style.RESET_ALL}")
+                    raise PermissionError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: Permissões insuficientes para escrever em {Style.BRIGHT}{self.args.copy}{Style.RESET_ALL}")
             else:
-                raise FileNotFoundError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: Destination path {Style.BRIGHT}{self.args.copy}{Style.RESET_ALL} does not exist")
+                raise FileNotFoundError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: O caminho de destino {Style.BRIGHT}{self.args.copy}{Style.RESET_ALL} não existe")
 
     def validate_move(self):
         if self.args.move:
             if os.path.exists(self.args.move):
                 if not os.access(self.args.move, os.W_OK):
-                    raise PermissionError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: Cannot write to {Style.BRIGHT}{self.args.move}{Style.RESET_ALL}")
+                    raise PermissionError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: Permissões insuficientes para escrever em {Style.BRIGHT}{self.args.move}{Style.RESET_ALL}")
             else:
-                raise FileNotFoundError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Error: Destination path: {Style.BRIGHT}{self.args.move}{Style.RESET_ALL} does not exist")
+                raise FileNotFoundError(f"{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Erro: O caminho de destino: {Style.BRIGHT}{self.args.move}{Style.RESET_ALL} não existe")
 
     def check_arguments(self):
         if len(sys.argv) == 1:
@@ -276,7 +277,7 @@ class SearchParty:
             self.print_help_and_exit()
 
         else:
-            print(f"Starting SearchParty with PID {os.getpid()}. [{time.strftime('%H:%M:%S %d/%b/%Y')}]\n")
+            print(f"Iniciando SearchParty com PID {os.getpid()}. [{time.strftime('%H:%M:%S %d/%b/%Y')}]\n")
             self.start_information()
 
     def convert_size(self, size):
@@ -297,18 +298,18 @@ class SearchParty:
         operating_system = f'{platform.system()} {platform.release()} {platform.machine()}'
         sys_uptime = str(datetime.datetime.now() - datetime.datetime.fromtimestamp(psutil.boot_time())).split('.')[0]
 
-        self.sys_info = f"{Style.BRIGHT}{Fore.BLUE}[*]{Style.RESET_ALL} System Information\n\n" \
-                        f"Current User: {current_user}\n" \
-                        f"Hostname: {hostname}\n" \
-                        f"Operating System: {operating_system}\n" \
-                        f"File System Size: {fs_size}\n" \
-                        f"Uptime: {sys_uptime}\n"
+        self.sys_info = f"{Style.BRIGHT}{Fore.BLUE}[*]{Style.RESET_ALL} Informações do sistema\n\n" \
+                        f"Usuário: {current_user}\n" \
+                        f"Máquina: {hostname}\n" \
+                        f"Sistema operacional: {operating_system}\n" \
+                        f"Sistema de arquivos: {fs_size}\n" \
+                        f"Tempo de atividade: {sys_uptime}\n"
 
         if self.args.directory:
-            self.sys_info += f"Working Directories: {' '.join(directory for directory in self.args.directory)}"
+            self.sys_info += f"Diretórios: {' '.join(directory for directory in self.args.directory)}"
 
         if self.args.file:
-            self.sys_info += f"Working Files: {' '.join(file_path for file_path in self.args.file)}"
+            self.sys_info += f"Aqruivos: {' '.join(file_path for file_path in self.args.file)}"
 
         print(self.sys_info)
         self.process_contents()
@@ -316,7 +317,7 @@ class SearchParty:
     def process_contents(self):
 
         self.supported_files = {}
-        print(f"\n{Style.BRIGHT}{Fore.BLUE}[*]{Style.RESET_ALL} Enumerating Contents. [{time.strftime('%H:%M:%S %d/%b/%Y')}]\n")
+        print(f"\n{Style.BRIGHT}{Fore.BLUE}[*]{Style.RESET_ALL} Enumerando conteúdos. [{time.strftime('%H:%M:%S %d/%b/%Y')}]\n")
         if self.args.directory:
             self.directory_size = 0
             for argument in self.args.directory:
@@ -331,7 +332,7 @@ class SearchParty:
                                 self.supported_files[pattern_name].append(full_path)
 
         if len(self.supported_files) != 0:
-            print(f"Directories Have {sum(len(value) for value in self.supported_files.values())} Supported Items. {self.convert_size(self.directory_size)}")
+            print(f"Os diretórios possuem {sum(len(value) for value in self.supported_files.values())} arquivos suportados. {self.convert_size(self.directory_size)}")
             sorted_keys = sorted(self.supported_files.keys(), key=lambda x: (self.file_patterns[x], x, len(x)))
             for key in sorted_keys:
                 print(f"{self.file_patterns[key]} ({len(self.supported_files[key])})")
@@ -349,14 +350,14 @@ class SearchParty:
                         print(f"File: {file_path} ({self.convert_size(os.path.getsize(file_path))}) is {guess_mime(file_path) or from_file(file_path, mime=True)}")
 
         if len(self.supported_files) == 0:
-            print(f"{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} No supported files were encountered.")
+            print(f"{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} Nenhum arquivos suportado foi encontrado")
             sys.exit()
 
         self.process_files()
 
     def process_files(self):
 
-        print(f"\n{Style.BRIGHT}{Fore.BLUE}[*]{Style.RESET_ALL} Starting Data Extraction. [{time.strftime('%H:%M:%S %d/%b/%Y')}]\n")
+        print(f"\n{Style.BRIGHT}{Fore.BLUE}[*]{Style.RESET_ALL} Iniciando a extração de dados. [{time.strftime('%H:%M:%S %d/%b/%Y')}]\n")
 
         self.data_found = {}
         self.error_files = {}
@@ -377,7 +378,7 @@ class SearchParty:
         self.process_results()
 
     def extract_from_pdf(self, pdf_path):
-        print("Extracting text from PDF files")
+        print("Extraindo texto de arquivos PDF")
         text = ''
         try:
             for pdf_file in pdf_path:
@@ -387,7 +388,7 @@ class SearchParty:
             self.error_files['pdf'] = self.error_files.get('pdf', 0) + 1
 
     def extract_from_pptx(self, pptx_path):
-        print("Extracting text from PowerPoint files")
+        print("Extraindo texto de arquivos PowerPoint")
         for pptx_file in pptx_path:
             try:
                 text = ''
@@ -404,7 +405,7 @@ class SearchParty:
                 self.error_files['pptx'] += 1
 
     def extract_from_docx(self, docx_path):
-        print("Extracting text from Word Documents")
+        print("Extraindo texto de documentos Word")
         for docx_file in docx_path:
             try:
                 text = ''
@@ -419,7 +420,7 @@ class SearchParty:
                 self.error_files['docx'] += 1
 
     def extract_from_xlsx(self, xlsx_path):
-        print("Extracting text from SpreadSheets")
+        print("Extraindo texto de SpreadSheets")
         for xlsx_file in xlsx_path:
             try:
                 text = ''
@@ -436,7 +437,7 @@ class SearchParty:
                 self.error_files['xlsx'] += 1
 
     def extract_from_txt(self, txt_path):
-        print("Extracting text from Text files")
+        print("Extraindo texto de arquivos de Texto")
         for txt_file in txt_path:
             try:
                 with open(txt_file, 'r', encoding='utf-8') as file:
@@ -448,7 +449,7 @@ class SearchParty:
                 self.error_files['txt'] += 1
 
     def extract_from_csv(self, csv_path):
-        print("Extracting text from CSV files")
+        print("Extraindo texto de arquivos CSV")
         for csv_file in csv_path:
             try:
                 text = ''
@@ -463,7 +464,7 @@ class SearchParty:
                 self.error_files['csv'] += 1
 
     def extract_from_jpeg(self, jpeg_path):
-        print("Extracting text from JPEG images")
+        print("Extraindo texto de imagens JPEG")
         for jpeg_file in jpeg_path:
             try:
                 text = ''
@@ -476,7 +477,7 @@ class SearchParty:
                 self.error_files['jpeg'] += 1
 
     def extract_from_png(self, png_path):
-        print("Extracting text from PNG images")
+        print("Extraindo texto de imagens PNG")
         for png_file in png_path:
             try:
                 text = ''
@@ -489,7 +490,7 @@ class SearchParty:
                 self.error_files['png'] += 1
 
     def extract_from_bmp(self, bmp_path):
-        print("Extracting text from Bitmap images")
+        print("Extraindo texto de imagens Bitmap")
         for bmp_file in bmp_path:
             try:
                 text = ''
@@ -502,7 +503,7 @@ class SearchParty:
                 self.error_files['bmp'] += 1
 
     def extract_from_tiff(self, tiff_path):
-        print("Extracting text from TIFF images")
+        print("Extraindo texto de imagens TIFF")
         for tiff_file in tiff_path:
             try:
                 text = ''
@@ -515,7 +516,7 @@ class SearchParty:
                 self.error_files['tiff'] += 1
 
     def extract_from_webp(self, webp_path):
-        print("Extracting text from WebP images")
+        print("Extraindo texto de imagens WebP")
         for webp_file in webp_path:
             try:
                 text = ''
@@ -528,7 +529,7 @@ class SearchParty:
                 self.error_files['webp'] += 1
 
     def extract_from_gif(self, gif_path):
-        print("Extracting text from GIF images")
+        print("Extraindo texto de imagens GIF")
         for gif_file in gif_path:
             try:
                 with Image.open(gif_file) as file:
@@ -547,7 +548,7 @@ class SearchParty:
                 self.error_files['gif'] += 1
 
     def extract_from_email(self, email_path):
-        print(f"Extracting text from Email Messages")
+        print(f"Extraindo texto de arquivos de Email")
         for email_file in email_path:
             try:
                 with open(email_file, 'r', encoding='utf-8') as file:
@@ -574,16 +575,16 @@ class SearchParty:
                 self.error_files['emails'] += 1
 
     def find_patterns(self, text, path):
-        keywords_found = {'Ethnic Groups': [keyword for keyword in self.ethnic_groups if re.search(keyword, text, re.IGNORECASE)],
-                          'Financial Information': [keyword for keyword in self.financial_information if re.search(keyword, text, re.IGNORECASE)],
-                          'Gender and Sexual orientation': [keyword for keyword in self.gender_orientation if re.search(keyword, text, re.IGNORECASE)],
-                          'Legal Information': [keyword for keyword in self.legal_information if re.search(keyword, text, re.IGNORECASE)],
-                          'Medical Records': [keyword for keyword in self.medical_information if re.search(keyword, text, re.IGNORECASE)],
-                          'Political preferences': [keyword for keyword in self.political_preferences if re.search(keyword, text, re.IGNORECASE)],
-                          'Property Information': [keyword for keyword in self.property_information if re.search(keyword, text, re.IGNORECASE)],
-                          'Religion and Faith': [keyword for keyword in self.religion_keywords if re.search(keyword, text, re.IGNORECASE)],
-                          'Travel History': [keyword for keyword in self.travel_information if re.search(keyword, text, re.IGNORECASE)],
-                          'Vehicle Documents': [keyword for keyword in self.vehicle_information if re.search(keyword, text, re.IGNORECASE)]}
+        keywords_found = {'Grupos étnicos': [keyword for keyword in self.ethnic_groups if re.search(keyword, text, re.IGNORECASE)],
+                          'Informações financeiras': [keyword for keyword in self.financial_information if re.search(keyword, text, re.IGNORECASE)],
+                          'Gênero e orientação sexual': [keyword for keyword in self.gender_orientation if re.search(keyword, text, re.IGNORECASE)],
+                          'Informações jurídicas': [keyword for keyword in self.legal_information if re.search(keyword, text, re.IGNORECASE)],
+                          'Informações médicas': [keyword for keyword in self.medical_information if re.search(keyword, text, re.IGNORECASE)],
+                          'Preferências políticas': [keyword for keyword in self.political_preferences if re.search(keyword, text, re.IGNORECASE)],
+                          'Informações sobre imóveis': [keyword for keyword in self.property_information if re.search(keyword, text, re.IGNORECASE)],
+                          'Religião e fé': [keyword for keyword in self.religion_keywords if re.search(keyword, text, re.IGNORECASE)],
+                          'Histórico de viagens': [keyword for keyword in self.travel_information if re.search(keyword, text, re.IGNORECASE)],
+                          'Documentos de veículo': [keyword for keyword in self.vehicle_information if re.search(keyword, text, re.IGNORECASE)]}
 
         if self.args.findme:
             for argument in self.args.findme:
@@ -610,7 +611,7 @@ class SearchParty:
                     self.data_found[f"{pattern_name}"].add(path)
 
     def copy_files(self):
-        print(f"{Style.BRIGHT}{Fore.BLUE}[*]{Style.RESET_ALL} Copying files to {Style.BRIGHT}{self.args.copy}{Style.RESET_ALL} please wait.")
+        print(f"{Style.BRIGHT}{Fore.BLUE}[*]{Style.RESET_ALL} Copiando arquivos para {Style.BRIGHT}{self.args.copy}{Style.RESET_ALL} por favor aguarde.")
 
         errors = set()
         files_copied = False
@@ -630,15 +631,15 @@ class SearchParty:
                         error_type = type(error).__name__
                         errors.add(error_type)
 
-        copied_message = f'\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} Done!' if files_copied else ''
+        copied_message = f'\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} Concluído!' if files_copied else ''
 
         if errors:
-            copied_message += f'\n{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} Errors were encountered when copying files: {", ".join(errors)}'
+            copied_message += f'\n{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} Errors foram encontrados ao copiar arquivos: {", ".join(errors)}'
 
         print(copied_message)
 
     def move_files(self):
-        print(f"{Style.BRIGHT}{Fore.BLUE}[*]{Style.RESET_ALL} Moving files to {Style.BRIGHT}{self.args.move}{Style.RESET_ALL} please wait.")
+        print(f"{Style.BRIGHT}{Fore.BLUE}[*]{Style.RESET_ALL} Movendo arquivos para {Style.BRIGHT}{self.args.move}{Style.RESET_ALL} por favor aguarde.")
 
         errors = set()
         files_moved = False
@@ -658,15 +659,15 @@ class SearchParty:
                         error_type = type(error).__name__
                         errors.add(error_type)
 
-        moved_message = f'\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} Done!' if files_moved else ''
+        moved_message = f'\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} Concluído!' if files_moved else ''
 
         if errors:
-            moved_message += f'\nErrors were encountered when moving files: {", ".join(errors)}'
+            moved_message += f'\nErrors foram encontrados ao mover arquivos: {", ".join(errors)}'
 
         print(moved_message)
 
     def delete_files(self):
-        print(f"{Style.BRIGHT}{Fore.BLUE}[*]{Style.RESET_ALL} Deleting files, please wait.")
+        print(f"{Style.BRIGHT}{Fore.BLUE}[*]{Style.RESET_ALL} Deletando arquivos, por favor aguarde.")
 
         errors = set()
 
@@ -685,10 +686,10 @@ class SearchParty:
                         error_type = type(error).__name__
                         errors.add(error_type)
 
-        deleted_message = f'\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} Done!' if files_deleted else ''
+        deleted_message = f'\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} Concluído!' if files_deleted else ''
 
         if errors:
-            deleted_message += f'\n{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} Errors were encountered when deleting files: {", ".join(errors)}'
+            deleted_message += f'\n{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} Errors foram encontrados ao deletar arquivos: {", ".join(errors)}'
 
         print(deleted_message)
 
@@ -719,20 +720,20 @@ class SearchParty:
                             print(info, file=output_file)
 
     def result_stats(self):
-        results_info = f"\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} Data Analytics:\n"
-        results_info += ''.join([f"\n{key + ':': <26} {value} entries" for key, value in self.data_indexes.items() if value != 0]) + '\n'
-        results_info += f"\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} File Analytics:\n"
+        results_info = f"\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} Análise de Dados:\n"
+        results_info += ''.join([f"\n{key + ':': <26} {value} ocorrências" for key, value in self.data_indexes.items() if value != 0]) + '\n'
+        results_info += f"\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} Análise de Arquivos:\n"
 
         if not (self.args.findme or self.args.file):
-            results_info += ''.join([f"\n{key + ':': <27}{len(value)} files" for key, value in self.data_found.items() if value != 0]) + '\n'
+            results_info += ''.join([f"\n{key + ':': <27}{len(value)} arquivos" for key, value in self.data_found.items() if value != 0]) + '\n'
 
-        results_info += ''.join([f"\n{str(key).upper() + ' files:': <13}{len(self.supported_files[key])} read" for key in self.supported_files.keys()])
+        results_info += ''.join([f"\n{str(key).upper() + ' arquivos:': <13}{len(self.supported_files[key])} processados" for key in self.supported_files.keys()])
 
         if sum(self.error_files.values()) != 0:
-            results_info += f'\n\n{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} Errors were encountered while reading {sum(self.error_files.values())} files:\n'
+            results_info += f'\n\n{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} Erros foram encontrados ao ler {sum(self.error_files.values())} arquivos:\n'
             results_info += ''.join([f"\n{str(key).upper()+':': <6}{self.error_files[key]}" for key in self.error_files.keys()])
 
-        results_info += f"\n\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} Search process completed. [{time.strftime('%H:%M:%S %d/%b/%Y')}]"
+        results_info += f"\n\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} Processo de busca finalizado. [{time.strftime('%H:%M:%S %d/%b/%Y')}]"
         return results_info
 
     def results_information(self):
@@ -743,12 +744,12 @@ class SearchParty:
             for argument in self.args.findme:
                 if argument in arguments_found:
                     files_with_keywords = sum(1 for info in self.data_found[argument] if "keywords" in info)
-                    print(f'\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} Found "{argument}" on {len(self.data_found[argument])} file(s). {f"{files_with_keywords} contain PII/Sensitive data." if files_with_keywords else ""}\n')
+                    print(f'\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} "{argument}" foi encontrado em {len(self.data_found[argument])} arquivo(s). {f"{files_with_keywords} contém PII/dados sensiveis." if files_with_keywords else ""}\n')
                     for info in self.data_found[argument]:
                         print(info['file'])
                     if files_with_keywords:
                         for info in [info for info in self.data_found[argument] if 'keywords' in info]:
-                            print(f"\n{Style.BRIGHT}{Fore.GREEN}[+]{Fore.RESET}{Style.RESET_ALL} keyword types found on {Style.BRIGHT}{info['file']}{Style.RESET_ALL}\n")
+                            print(f"\n{Style.BRIGHT}{Fore.GREEN}[+]{Fore.RESET}{Style.RESET_ALL} Palavras-chave encontradas em {Style.BRIGHT}{info['file']}{Style.RESET_ALL}\n")
                             for key in (key for key in info['keywords'] if info['keywords'].get(key) and len(info['keywords'].get(key)) != 0):
                                 print(f"{key}")
                 else:
@@ -756,33 +757,33 @@ class SearchParty:
             if arguments_not_found:
                 print()
                 for argument in arguments_not_found:
-                    print(f"{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} No match was found for '{argument}' on {', '.join([os.path.basename(os.path.normpath(directory)) for directory in self.args.directory]) or ', '.join([os.path.basename(file_path) for file_path in self.args.file])}")
+                    print(f"{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} Não foi encontrada nenhuma correspondência para '{argument}' on {', '.join([os.path.basename(os.path.normpath(directory)) for directory in self.args.directory]) or ', '.join([os.path.basename(file_path) for file_path in self.args.file])}")
         else:
             if self.args.directory:
                 for data_type, file_list in self.data_found.items():
                     if file_list:
-                        print(f"\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} Files containing {Style.BRIGHT}{data_type}{Style.RESET_ALL}:\n")
+                        print(f"\n{Style.BRIGHT}{Fore.GREEN}[+]{Style.RESET_ALL} Arquivos contendo {Style.BRIGHT}{data_type}{Style.RESET_ALL}:\n")
                         for info in file_list:
                             print(info)
 
     def process_results(self):
         if sum(value for value in self.data_indexes.values()) == 0:
             if self.args.directory:
-                print(f"\n{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} No data were found at: {', '.join([os.path.basename(os.path.abspath(directory)) for directory in self.args.directory])}\n")
+                print(f"\n{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} Nenhum dado foi encontrado em: {', '.join([os.path.basename(os.path.abspath(directory)) for directory in self.args.directory])}\n")
             if self.args.file:
-                print(f"\n{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} No data were found at: {', '.join([os.path.basename(file_path) for file_path in self.args.file])}\n")
+                print(f"\n{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} Nenhum dado foi encontrado em: {', '.join([os.path.basename(file_path) for file_path in self.args.file])}\n")
         else:
 
             if self.args.loot or self.args.database:
                 print(f'{self.result_stats()}\n')
                 (self.export_to_loot() if self.args.loot else None) or (self.export_to_database() if self.args.database else None)
                 if self.args.loot and self.args.database:
-                    print(f"saving output to {Style.BRIGHT}{', '.join([self.args.loot, self.args.database])}{Style.RESET_ALL}")
+                    print(f"Salvando resultados em {Style.BRIGHT}{', '.join([self.args.loot, self.args.database])}{Style.RESET_ALL}")
                 else:
-                    print(f"saving output to {Style.BRIGHT}{self.args.loot or self.args.database}{Style.RESET_ALL}" if self.args.loot or self.args.database else "")
+                    print(f"Salvando resultados em {Style.BRIGHT}{self.args.loot or self.args.database}{Style.RESET_ALL}" if self.args.loot or self.args.database else "")
 
             else:
-                print(f"\n{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} No output file specified, showing results at the terminal.")
+                print(f"\n{Style.BRIGHT}{Fore.YELLOW}[!]{Style.RESET_ALL} Nenhum arquivo de saída especificado, mostrando os resultados no terminal.")
                 time.sleep(5)
                 self.results_information()
                 print(f'{self.result_stats()}\n')
@@ -801,4 +802,4 @@ if __name__ == '__main__':
 
 end_time = time.time()
 
-print(f'Elapsed time: {datetime.timedelta(seconds=end_time - start_time)}')
+print(f'Tempo total de execução: {datetime.timedelta(seconds=end_time - start_time)}')
