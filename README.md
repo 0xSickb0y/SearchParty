@@ -64,13 +64,6 @@ Please be aware that some terminal environments may not support Colorama for col
 - **Religion and faith**
 - **Travel history**
 
-## Usage
-
-Running the tool:
-
-    python SearchParty.py [-h] [-F $file] [-D $directory] [--find  [...]] [--loot [$name]] [--database [$sql.db]] [--data-type $type] [--file-type $type] [--copy-files $dst]
-                      [--move-files $dst] [--delete-files]
-
 ## Options
 ```
   -h, --help            show this help message and exit
@@ -85,3 +78,10 @@ Running the tool:
   --move-files $dst     move files to another location
   --delete-files        delete files from the file system
 ```
+
+## Usage
+
+Running the tool:
+
+    python SearchParty.py [-h] [-F $file] [-D $directory] [--find  [...]] [--loot [$name]] [--database [$sql.db]] [--data-type $type] [--file-type $type] [--copy-files $dst]
+                      [--move-files $dst] [--delete-files]
