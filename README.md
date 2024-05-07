@@ -3,7 +3,7 @@
 ![SearchParty_en-us](https://github.com/0xSickb0y/SearchParty/assets/148525929/f2bdf931-cc06-4837-bbff-fe213aa3dcc6)
 
 ## Intro ##
- _SearchParty_ is a tool developed as part of the [FIAP](https://www.fiap.com.br) Challenge project for the 2023 mid-year Cyber-Defense classes.
+ _**SearchParty**_ is a tool developed as part of the [FIAP](https://www.fiap.com.br) Challenge project for the 2023 mid-year Cyber-Defense classes.
 
 Its primary purpose is to find personal and sensitive data within the file system.
 
