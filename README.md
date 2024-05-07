@@ -35,11 +35,13 @@ Additionally, the tool provides practical file management features, enabling use
 - **.eml**: message/rfc822
 
 ## Supported Data Types
-- **(cpf)** 546.435.321-01
-- **(rg)** 54.643.532.10
-- **(cnpj)** 54.643.532/0000-10
-- **(email)** _example.user@domain.org_
-- **(phone)** +55 (11) 95464-3521, (11) 95464-3521, 11 95464-3521
+- **cpf**
+- **rg**
+- **cnpj**
+- **email**
+- **phone**
+- **nit**
+- **cns**
 - **Ethnic groups**
 - **Financial information**
 - **Legal information**
