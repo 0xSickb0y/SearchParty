@@ -86,3 +86,7 @@ Executando a ferramenta:
 
     python SearchParty.py [-h] [-F $file] [-D $directory] [--find  [...]] [--loot [$name]] [--database [$sql.db]] [--data-type $type] [--file-type $type] [--copy-files $dst]
                       [--move-files $dst] [--delete-files]
+
+## Outro
+
+Uma Interface Gráfica do Usuário (GUI) está atualmente em desenvolvimento como uma alternativa à interface de linha de comando (CLI). Esta opção tem como objetivo fornecer uma experiência mais intuitiva e amigável ao usuário, simplificando o processo de escaneamento, análise e gerenciamento de dados.
