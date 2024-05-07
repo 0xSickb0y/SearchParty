@@ -38,7 +38,7 @@ banner_str = r'''
   \__ \/ _ \/ __ `/ ___/ ___/ __ \   / /_/ / __ `/ ___/ __/ / / /
  ___/ /  __/ /_/ / /  / /__/ / / /  / ____/ /_/ / /  / /_/ /_/ /
 /____/\___/\__,_/_/   \___/_/ /_/  /_/    \__,_/_/   \__/\__  /
-                                                         /___/
+v1.0                                                     /___/
 
 Offline tool for personal/sensitive data mapping & analytics
 https://github.com/0xSickb0y/SearchParty/
