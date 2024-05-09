@@ -82,13 +82,13 @@ Please be aware that some terminal environments may not support Colorama for col
 
 ## Usage
 
-Running the tool:
+- Running the tool:
 
     python SearchParty.py [-h] [-F $file] [-D $directory] [--find  [...]] [--loot [$name]] [--database [$sql.db]] [--data-type $type] [--file-type $type] [--copy-files $dst] [--move-files $dst] [--delete-files]
 
 ---
 
-Scanning a directory:
+- Scanning a directory:
     
     python SearchParty.py -D /path/to/directory
 
@@ -96,7 +96,7 @@ This command will scan through the specified directory and analyze the content o
 
 ---
 
-Scanning a file:
+- Scanning a file:
 
     python SearchParty.py -F /path/to/myfile.txt
 
@@ -104,7 +104,7 @@ This command will scan the specific file `myfile.txt` and analyze its content. T
 
 ---
 
-Search for specific values:
+- Search for specific values:
 
     python SearchParty.py --find 'John Doe' '47.283.723-0'
 
@@ -112,7 +112,7 @@ This command will search for specific values ('John Doe' and '47.283.723-0') wit
 
 ---
 
-Save results to text files:
+- Save results to text files:
 
     python SearchParty.py --loot /path/to/results | python SearchParty.py --loot
 
@@ -120,7 +120,7 @@ This command will save the results of the scan to the specified directory `/path
 
 ---
 
-Save results to a database:
+- Save results to a database:
 
     python SearchParty.py --database my_database.db | python SearchParty.py --database
 
@@ -128,7 +128,7 @@ This command will save the results of the scan to a SQLite database named `my_da
 
 ---
 
-Filtering data types:
+- Filtering data types:
 
     python SearchParty.py --data-type 'Cadastro de pessoa física','Cartão nacional de saúde'
 
@@ -137,7 +137,7 @@ This command will specify the data types to search for during the scan. Only dat
 
 ---
 
-Filtering file types:
+- Filtering file types:
 
     python SearchParty.py --file-type pdf,docx
 
@@ -145,7 +145,7 @@ This command will specify the types of files to include in the scan. Only files 
 
 ---
 
-Copying files:
+- Copying files:
 
     python SearchParty.py --copy-files /path/to/destination
 
@@ -153,7 +153,7 @@ This command will copy files containing extracted data to the specified destinat
 
 ---
 
-Moving files:
+- Moving files:
 
     python SearchParty.py --move-files /path/to/destination
 
@@ -162,13 +162,13 @@ This command will move files containing extracted data to the specified destinat
 
 ---
 
-Deleting files:
+- Deleting files:
 
     python SearchParty.py --delete-files
 
-This command will delete files from the file system after extracting data from them. Exercise caution when using this option, as it will permanently remove files containing extracted data from the file system.
+This command will delete the files after extracting data from them. Exercise caution when using this option, as it will permanently remove files containing extracted data from the file system.
 
 
 ## Outro
 
-A Graphical User Interface (GUI) is currently under development as an  alternative to the command-line interface (CLI). This option aims to provide a more intuitive and user-friendly experience, simplifying the process of scanning, analyzing, and managing data
+A Graphical User Interface (GUI) is currently under development as an  alternative to the command-line interface (CLI). This option aims to provide a more intuitive and user-friendly experience, simplifying the process of scanning, analyzing, and managing data.
