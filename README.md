@@ -82,13 +82,13 @@ Alguns ambientes de terminal podem não suportar o Colorama para formatação de
 ```
 ## Uso
 
-- Executando a ferramenta:
+Executando a ferramenta:
 
     python SearchParty.py [-h] [-F $arquivo] [-D $diretório] [--find  [...]] [--loot [$nome]] [--database [$sql.db]] [--data-type $tipo] [--file-type $tipo] [--copy-files $dst] [--move-files $dst] [--delete-files]
 
 ---
 
-- Escaneando um diretório:
+Escaneando um diretório:
     
     python SearchParty.py -D /caminho/para/diretório
 
@@ -96,7 +96,7 @@ Este comando irá percorrer o diretório especificado e analisar o conteúdo de 
 
 ---
 
-- Escaneando um arquivo:
+Escaneando um arquivo:
 
     python SearchParty.py -F /caminho/para/myfile.txt
 
@@ -104,7 +104,7 @@ Este comando irá escanear o arquivo específico `myfile.txt` e analisar seu con
 
 ---
 
-- Buscar por valores específicos:
+Buscar por valores específicos:
 
     python SearchParty.py --find 'John Doe' '47.283.723-0'
 
@@ -112,7 +112,7 @@ Este comando buscará por valores específicos ('John Doe' e '47.283.723-0') den
 
 ---
 
-- Salvar resultados em arquivos de texto:
+Salvar resultados em arquivos de texto:
 
     python SearchParty.py --loot /caminho/para/resultados | python SearchParty.py --loot
 
@@ -120,7 +120,7 @@ Este comando irá salvar os resultados da varredura no diretório especificado `
 
 ---
 
-- Salvar resultados em um banco de dados:
+Salvar resultados em um banco de dados:
 
     python SearchParty.py --database banco_de_dados.db | python SearchParty.py --database
 
@@ -128,7 +128,7 @@ Este comando irá salvar os resultados da varredura em um banco de dados SQLite 
 
 ---
 
-- Filtrando tipos de dados:
+Filtrando tipos de dados:
 
     python SearchParty.py --data-type 'Cadastro de pessoa física','Cartão nacional de saúde'
 
@@ -136,7 +136,7 @@ Este comando especificará os tipos de dados a serem pesquisados durante a varre
 
 ---
 
-- Filtrando tipos de arquivo:
+Filtrando tipos de arquivo:
 
     python SearchParty.py --file-type pdf,docx
 
@@ -144,7 +144,7 @@ Este comando especificará os tipos de arquivos a serem incluídos na varredura.
 
 ---
 
-- Copiando arquivos:
+Copiando arquivos:
 
     python SearchParty.py --copy-files /caminho/para/destino
 
@@ -152,7 +152,7 @@ Este comando copiará arquivos contendo dados extraídos para o diretório de de
 
 ---
 
-- Movendo arquivos:
+Movendo arquivos:
 
     python SearchParty.py --move-files /caminho/para/destino
 
@@ -160,7 +160,7 @@ Este comando moverá arquivos contendo dados extraídos para o diretório de des
 
 ---
 
-- Excluindo arquivos:
+Excluindo arquivos:
 
     python SearchParty.py --delete-files
 
