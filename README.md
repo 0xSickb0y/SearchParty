@@ -1,6 +1,6 @@
 # SearchParty #
 
-![SearchParty_en-us](https://github.com/0xSickb0y/SearchParty/assets/148525929/f2bdf931-cc06-4837-bbff-fe213aa3dcc6)
+![SearchParty_pt-br](https://github.com/0xSickb0y/SearchParty/assets/148525929/b237014f-520b-4cdc-b95a-14127ee7f3ff)
 
 ## Intro
 
