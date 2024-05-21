@@ -62,7 +62,7 @@ Alguns ambientes de terminal podem não suportar o Colorama para formatação de
 - **Preferências políticas**
 - **Documentos de veículo**
 - **Gênero e orientação sexual**
-- **Informações sobre imóveis**
+- **Informações sobre imóveis e propiedade**
 - **Religião e fé**
 - **Histórico de viagens**
 
