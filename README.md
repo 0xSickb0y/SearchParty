@@ -69,22 +69,22 @@ Alguns ambientes de terminal podem não suportar o Colorama para formatação de
 ## Opções
 ```
   -h, --help            show this help message and exit
-  -F $file              scan file
-  -D $directory         scan directory
-  --find  [ ...]        search for specific values ('John Doe' '47.283.723-0')
-  --loot [$name]        save results to a directory (default: $current/loot)
-  --database [$sql.db]  save results to a database (default: $hostname.db)
-  --data-type $type     data types separated by comma (cpf,rg)
-  --file-type $type     file types separated by comma (pdf,docx)
-  --copy-files $dst     copy files to another location
-  --move-files $dst     move files to another location
-  --delete-files        delete files from the file system
+  -F $file              escanear arquivo
+  -D $directory         escanear diretório
+  --find  [ ...]        procurar valores específicos ('John Doe' '47.283.723-0')
+  --loot [$name]        salvar resultados em um diretório (default: $current/loot)
+  --database [$sql.db]  salvar resultados em um banco de dados (default: $hostname.db)
+  --data-type $type     tipos de dados separados por vírgula
+  --file-type $type     tipos de arquivos separados por vírgula
+  --copy-files $dst     copiar arquivos para outro local
+  --move-files $dst     mover arquivos para outro local
+  --delete-files        excluir arquivos do sistema de arquivos
 ```
 ## Uso
 
 Executando a ferramenta:
 
-    python SearchParty.py [-h] [-F $arquivo] [-D $diretório] [--find  [...]] [--loot [$nome]] [--database [$sql.db]] [--data-type $tipo] [--file-type $tipo] [--copy-files $dst] [--move-files $dst] [--delete-files]
+    python SearchParty.py [-h] [-F $file] [-D $directory] [--find  [...]] [--loot [$name]] [--database [$sql.db]] [--data-type $type] [--file-type $type] [--copy-files $dst] [--move-files $dst] [--delete-files]
 
 ---
 
