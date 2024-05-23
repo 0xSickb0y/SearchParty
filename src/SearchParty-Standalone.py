@@ -727,7 +727,7 @@ class SearchParty:
         if not (self.args.findme or self.args.file):
             results_info += ''.join([f"\n{key + ':': <27}{len(value)} arquivos" for key, value in self.data_found.items() if value != 0]) + '\n'
 
-        results_info += ''.join([f"\n{str(key).upper() + ' arquivos:': <13}{len(self.supported_files[key])} processados" for key in self.supported_files.keys()])
+        results_info += ''.join([f"\n{str(key).upper() + ':': <7}{len(self.supported_files[key])} arquivos" for key in self.supported_files.keys()])
 
         if sum(self.error_files.values()) != 0:
             results_info += f'\n\n{Style.BRIGHT}{Fore.RED}[-]{Style.RESET_ALL} Erros foram encontrados ao ler {sum(self.error_files.values())} arquivos:\n'
