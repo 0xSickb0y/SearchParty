@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import time
 from .Utils.ColorFormatting import *
 from .FileHandling.FileOperations import copy_files, move_files, delete_files

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import sys
 from .InitialSetup import initial_setup
 from .SearchResults import search_results
