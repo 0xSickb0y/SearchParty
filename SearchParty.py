@@ -32,7 +32,9 @@ def separate_args(arguments):
 
 parser.add_argument('-F', metavar="path", dest='file', action='append', help='escanear arquivo')
 parser.add_argument('-D', metavar="path", dest='directory', action='append', help='escanear diretório')
-parser.add_argument('-S', metavar='', dest='findme', type=str, nargs='+', help="procurar valores específicos")
+parser.add_argument('-sV', metavar='', dest='findme', type=str, nargs='+', help="procurar valores específicos")
+parser.add_argument('--data-type', metavar='type', dest='data_filters', type=separate_args, help='filtrar tipo de dados')
+parser.add_argument('--file-type', metavar='type', dest='file_filters', type=separate_args, help='filtrar tipo de arquivos')
 parser.add_argument('--to-csv', metavar="name", dest='csv', nargs='?', const=os.getcwd(), help='salvar resultados em csv')
 parser.add_argument('--to-json', metavar="name", dest='json', nargs='?', const=os.getcwd(), help='salvar resultados em json')
 parser.add_argument('--to-text', metavar="name", dest='text', nargs='?', const=os.getcwd(), help='salvar resultados em texto')
@@ -42,8 +44,6 @@ parser.add_argument('--move-files', metavar='dst', dest='move', nargs='?', const
 parser.add_argument('--delete-files', dest='delete', action="store_true", help='excluir arquivos do sistema de arquivos')
 parser.add_argument('--no-colors', dest='no_colors', action='store_true', help='desativar a formatação de cores na saída')
 parser.add_argument('--enable-ocr', dest='ocr_enabled', action='store_true', help='ativar o reconhecimento óptico de caracteres')
-parser.add_argument('--data-type', metavar='type', dest='data_filters', type=separate_args, help='filtrar tipo de dados')
-parser.add_argument('--file-type', metavar='type', dest='file_filters', type=separate_args, help='filtrar tipo de arquivos')
 
 args = parser.parse_args()
 
