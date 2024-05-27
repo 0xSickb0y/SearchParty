@@ -276,12 +276,12 @@ def validate_copy(args, colors):
         default = f'{args.copy}/CopiedFiles/'
 
         if os.path.isfile(args.copy):
-            raise ValueError(display_alert(f"Error: Destination path {args.copy} is a file", colors=colors))
+            raise ValueError(display_alert(f"Error: {args.copy} é arquivo", colors=colors))
 
         elif args.copy == current:
             if os.access(current, os.W_OK):
                 if os.path.exists(default):
-                    raise ValueError(display_alert(f"Error: Destination path {default} already exists", colors=colors))
+                    raise ValueError(display_alert(f"Error: {default} já existe", colors=colors))
                 args.copy = default
             else:
                 raise PermissionError(display_alert(f"Error: Permissões insuficientes para escrever em {current}", colors=colors))
@@ -290,7 +290,7 @@ def validate_copy(args, colors):
             default = f"{current}/{default}"
             if os.access(current, os.W_OK):
                 if os.path.exists(default):
-                    raise ValueError(display_alert(f"Error: Destination path {default} already exists", colors=colors))
+                    raise ValueError(display_alert(f"Error: {default} já existe", colors=colors))
                 args.copy = default
             else:
                 raise PermissionError(display_alert(f"Error: Permissões insuficientes para escrever em {current}", colors=colors))
@@ -299,7 +299,7 @@ def validate_copy(args, colors):
             parent_dir = os.path.split(args.copy)[0]
             if os.access(parent_dir, os.W_OK):
                 if os.path.exists(default):
-                    raise ValueError(display_alert(f"Error: Destination path {default} already exists", colors=colors))
+                    raise ValueError(display_alert(f"Error: {default} já existe", colors=colors))
                 args.copy = default
             else:
                 raise PermissionError(display_alert(f"Error: Permissões insuficientes para escrever em {parent_dir}", colors=colors))
@@ -311,12 +311,12 @@ def validate_move(args, colors):
         default = f'{args.move}/MovedFiles/'
 
         if os.path.isfile(args.move):
-            raise ValueError(display_alert(f"Error: Destination path {args.move} is a file", colors=colors))
+            raise ValueError(display_alert(f"Error: {args.move} é arquivo", colors=colors))
 
         elif args.move == current:
             if os.access(current, os.W_OK):
                 if os.path.exists(default):
-                    raise ValueError(display_alert(f"Error: Destination path {default} already exists", colors=colors))
+                    raise ValueError(display_alert(f"Error: {default} já existe", colors=colors))
                 args.move = default
             else:
                 raise PermissionError(display_alert(f"Error: Permissões insuficientes para escrever em {current}", colors=colors))
@@ -325,7 +325,7 @@ def validate_move(args, colors):
             default = f"{current}/{default}"
             if os.access(current, os.W_OK):
                 if os.path.exists(default):
-                    raise ValueError(display_alert(f"Error: Destination path {default} already exists", colors=colors))
+                    raise ValueError(display_alert(f"Error: {default} já existe", colors=colors))
                 args.move = default
             else:
                 raise PermissionError(display_alert(f"Error: Permissões insuficientes para escrever em {current}", colors=colors))
@@ -334,7 +334,7 @@ def validate_move(args, colors):
             parent_dir = os.path.split(args.move)[0]
             if os.access(parent_dir, os.W_OK):
                 if os.path.exists(default):
-                    raise ValueError(display_alert(f"Error: Destination path {default} already exists", colors=colors))
+                    raise ValueError(display_alert(f"Error: {default} já existe", colors=colors))
                 args.move = default
             else:
                 raise PermissionError(display_alert(f"Error: Permissões insuficientes para escrever em {parent_dir}", colors=colors))
