@@ -55,7 +55,7 @@ Additionally, the tool provides practical file management features, enabling use
 
 5. File Operations
 
-    - For file operations such as copying, moving, or deleting, SearchParty also verifies the permissions of the source files and the destination directory. 
+    - For file operations such as copying, moving, and deleting, SearchParty also verifies the permissions of the source files and the destination directory. 
 
     - Insufficient permissions may lead to unexpected behavior during operations, resulting in potential errors or incomplete tasks.
 
