@@ -1,6 +1,6 @@
 # SearchParty #
 
-![SearchParty_pt-br](https://github.com/0xSickb0y/SearchParty/assets/148525929/31ba5260-be25-4866-907b-a09832f01f27)
+![SearchParty_pt-br](https://github.com/0xSickb0y/SearchParty/assets/148525929/14bd2de4-dcb0-4010-8048-24cf82565666)
 
 
 ## Intro
@@ -60,6 +60,15 @@ Além disso, a ferramenta oferece recursos práticos de gerenciamento de arquivo
     - Para operações de arquivo, como copiar, mover e excluir, o SearchParty também verifica as permissões dos arquivos de origem e do diretório de destino.
 
     - Permissões insuficientes podem levar a comportamentos inesperados durante as operações, resultando em erros ou tarefas incompletas.
+
+6. Idiomas
+
+    - SearchParty é projetado para focar em dados específicos do português brasileiro.
+
+    - Uma branch foi criada para usuários que se sentem mais confortáveis usando a ferramenta em inglês (EUA).
+
+    - Se você deseja a versão em inglês, use o branch [en-us](https://github.com/0xSickb0y/SearchParty/tree/en-us).
+
 
 ## Extensões de arquivo suportadas
 
