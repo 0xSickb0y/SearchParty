@@ -1,6 +1,7 @@
 # SearchParty #
 
-![SearchParty_pt-br](https://github.com/0xSickb0y/SearchParty/assets/148525929/b237014f-520b-4cdc-b95a-14127ee7f3ff)
+![SearchParty_pt-br](https://github.com/0xSickb0y/SearchParty/assets/148525929/31ba5260-be25-4866-907b-a09832f01f27)
+
 
 ## Intro
 
@@ -16,24 +17,52 @@ Em seguida, um método de extração é iniciado para cada tipo de arquivo, com 
 
 Os métodos de extração usam expressões regulares e palavras-chave para examinar o texto extraído dos arquivos, procurando correspondências com os tipos de dados suportados.
 
-Durante a execução do programa, os dados são mapeados e, ao término, o usuário recebe um mapeamento compreensivo de sua localização, disponível em formato de banco de dados, arquivos de texto ou saída padrão.
+Após a conclusão, o usuário recebe um mapeamento compreensivo de arquivos contendo PII/dados sensiveis.
 
-Além disso, a ferramenta oferece recursos práticos de gerenciamento de arquivos, permitindo que os usuários copiem, movam ou excluam arquivos de acordo com os resultados de sua análise.
+Além disso, a ferramenta oferece recursos práticos de gerenciamento de arquivos, permitindo que os usuários copiem, movam ou excluam arquivos de acordo com os resultados.
 
-## Disclaimer
+## Aviso
 
-O SearchParty depende da biblioteca libmagic para identificação de tipos de arquivo. Em sistemas Windows, é recomendado usar o módulo [python-magic-bin](https://pypi.org/project/python-magic-bin/), que oferece uma interface para libmagic usando ctypes.
+1. Tipos MIME
 
-Um arquivo requirements.txt já foi criado para cada sistema:
+    - O SearchParty depende da biblioteca libmagic para identificação de tipos de arquivo.
 
-- Para sistemas baseados em Unix: `requirements_UNIX.txt`
-- Para Microsoft Windows: `requirements_WINDOWS.txt`
+    - Em sistemas Windows, é recomendado usar o módulo [python-magic-bin](https://pypi.org/project/python-magic-bin/), que fornece uma interface Python para libmagic usando ctypes.
 
-Para reconhecimento óptico de caracteres (OCR), o SearchParty utiliza a engine [Tesseract](https://github.com/tesseract-ocr/tesseract) para análise OCR. Certifique-se de ter o Tesseract instalado e configurado corretamente no seu sistema antes de usar o SearchParty.
+    - Um arquivo requirements já foi criado para ambos os casos:
+        
+        `requirements_UNIX.txt`
+        
+        `requirements_WINDOWS.txt`
 
-Alguns ambientes de terminal podem não suportar o Colorama para formatação de cores. Se encontrar problemas, considere usar o script `SearchParty-NoColors.py`.
+2. OCR
+
+    - O SearchParty depende da engine [Tesseract](https://github.com/tesseract-ocr/tesseract) para Reconhecimento Óptico de Caracteres.
+
+    - Certifique-se de que o Tesseract está instalado e configurado corretamente no seu sistema antes de utilizar as capacidades de OCR.
+
+    - Para habilitar a funcionalidade OCR, use a opção `--enable-ocr`.
+
+3. Formatação de Cores
+
+    - Certos ambientes de terminal podem não suportar o Colorama para formatação de cores.
+
+    - Você pode desativar essa funcionalidade usando a opção `--no-colors`.
+
+4. Operações de Exportação
+
+    - Antes de realizar quaisquer operações de exportação, o SearchParty verifica as permissões nos caminhos de destino.
+
+    - Certifique-se de que o destino possui permissões de escrita antes de tentar exportar os resultados.
+
+5. Operações de Arquivo
+
+    - Para operações de arquivo, como copiar, mover e excluir, o SearchParty também verifica as permissões dos arquivos de origem e do diretório de destino.
+
+    - Permissões insuficientes podem levar a comportamentos inesperados durante as operações, resultando em erros ou tarefas incompletas.
 
 ## Extensões de arquivo suportadas
+
 - **.txt**: text/plain
 - **.csv**: text/csv
 - **.bmp**: image/bmp
@@ -47,12 +76,15 @@ Alguns ambientes de terminal podem não suportar o Colorama para formatação de
 - **.pptx**: application/vnd.openxmlformats-officedocument.presentationml.presentation
 - **.pdf**: application/pdf
 - **.eml**: message/rfc822
+- **.mbox**: message/rfc822
+
 
 ## Tipos de dados suportados
-- **cpf** (Cadastro de pessoa física)
-- **rg** (Registro geral)
-- **nit** (Número de identificação do trabalhador)
-- **cns** (Cartão nacional de saúde)
+
+- **Cadastro de pessoa física**
+- **Registro geral**
+- **Número de identificação do trabalhador**
+- **Cartão nacional de saúde**
 - **endereços de e-mail**
 - **números de telefone**
 - **Grupos étnicos**
@@ -67,105 +99,200 @@ Alguns ambientes de terminal podem não suportar o Colorama para formatação de
 - **Histórico de viagens**
 
 ## Opções
+
 ```
   -h, --help            show this help message and exit
-  -F $file              escanear arquivo
-  -D $directory         escanear diretório
-  --find  [ ...]        procurar valores específicos ('John Doe' '47.283.723-0')
-  --loot [$name]        salvar resultados em um diretório (default: $current/loot)
-  --database [$sql.db]  salvar resultados em um banco de dados (default: $hostname.db)
-  --data-type $type     tipos de dados separados por vírgula
-  --file-type $type     tipos de arquivos separados por vírgula
-  --copy-files $dst     copiar arquivos para outro local
-  --move-files $dst     mover arquivos para outro local
+  -F path               escanear arquivo
+  -D path               escanear diretório
+  -sV  [ ...]           procurar valores específicos
+  --data-type type      filtrar tipo de dados
+  --file-type type      filtrar tipo de arquivos
+  --to-csv [name]       salvar resultados em csv
+  --to-json [name]      salvar resultados em json
+  --to-text [name]      salvar resultados em texto
+  --to-database [name]  salvar resultados em um banco de dados
+  --copy-files [dst]    copiar arquivos para outro local
+  --move-files [dst]    mover arquivos para outro local
   --delete-files        excluir arquivos do sistema de arquivos
+  --no-colors           desativar a formatação de cores na saída
+  --enable-ocr          ativar o reconhecimento óptico de caracteres
 ```
+
 ## Uso
 
-Executando a ferramenta:
-
-    python SearchParty.py [-h] [-F $file] [-D $directory] [--find  [...]] [--loot [$name]] [--database [$sql.db]] [--data-type $type] [--file-type $type] [--copy-files $dst] [--move-files $dst] [--delete-files]
-
 ---
 
-Escaneando um diretório:
+### Escanear um diretório:
     
-    python SearchParty.py -D /caminho/para/diretório
+    python SearchParty.py -D /caminho/para/diretorio
 
-Este comando irá percorrer o diretório especificado e analisar o conteúdo de todos os arquivos dentro dele. Qualquer dado que corresponda aos padrões de pesquisa predefinidos será extraído e categorizado conforme necessário.
+Este comando percorre o diretório especificado e analisa o conteúdo de todos os arquivos contidos nele. Quaisquer dados que correspondam aos padrões de pesquisa predefinidos serão mapeados adequadamente.
 
----
-
-Escaneando um arquivo:
-
-    python SearchParty.py -F /caminho/para/myfile.txt
-
-Este comando irá escanear o arquivo específico `myfile.txt` e analisar seu conteúdo. A ferramenta extrairá quaisquer dados que correspondam aos padrões de pesquisa predefinidos encontrados dentro do arquivo.
+A opção `-D` pode ser usada várias vezes (i.e. escaneie vários diretórios de uma vez).
 
 ---
 
-Buscar por valores específicos:
+### Escanear um arquivo:
 
-    python SearchParty.py --find 'John Doe' '47.283.723-0'
+    python SearchParty.py -F /caminho/para/meuarquivo.txt
 
-Este comando buscará por valores específicos ('John Doe' e '47.283.723-0') dentro do conteúdo dos arquivos. Se houver correspondências, a ferramenta irá extrair e categorizar os dados correspondentes.
+Este comando escaneia o arquivo específico `meuarquivo.txt` e analisará seu conteúdo. Quaisquer dados que correspondam aos padrões de pesquisa predefinidos serão mapeados adequadamente.
 
----
-
-Salvar resultados em arquivos de texto:
-
-    python SearchParty.py --loot /caminho/para/resultados | python SearchParty.py --loot
-
-Este comando irá salvar os resultados da varredura no diretório especificado `/caminho/para/resultados`. Os dados extraídos serão organizados e armazenados em arquivos dentro deste diretório. Se nenhum caminho de destino for fornecido, os resultados serão salvos no diretório atual sob `loot/*.txt`
+A opção `-F` pode ser usada várias vezes (i.e. escaneie vários arquivos de uma vez).
 
 ---
 
-Salvar resultados em um banco de dados:
+### Buscar valores específicos:
 
-    python SearchParty.py --database banco_de_dados.db | python SearchParty.py --database
+    python SearchParty.py -sV 'João da Silva' '47.283.723-0'
 
-Este comando irá salvar os resultados da varredura em um banco de dados SQLite chamado `banco_de_dados.db`. Cada entrada de dado extraída será armazenada como um registro no banco de dados, permitindo consultas e análises fáceis. Se nenhum caminho de destino for fornecido, os resultados serão salvos no diretório atual sob `$HOSTNAME.db`. É altamente recomendável deixar o nome do banco de dados como o nome do host, isso torna mais fácil identificar qual banco de dados está associado a cada máquina.
+Este comando buscará valores específicos ('João da Silva' e '47.283.723-0') dentro do conteúdo dos arquivos. Se houver correspondências, a ferramenta mapeará os dados correspondentes.
 
----
+Esta opção é particularmente útil para mapear dados relacionados a um indivíduo específico, identificando informações sensíveis como nomes pessoais, números de identificação ou quaisquer outros padrões de dados predefinidos.
 
-Filtrando tipos de dados:
-
-    python SearchParty.py --data-type 'Cadastro de pessoa física','Cartão nacional de saúde'
-
-Este comando especificará os tipos de dados a serem pesquisados durante a varredura. Apenas dados que correspondam aos tipos especificados (por exemplo, números de CPF e RG) serão extraídos e categorizados. (Esta opção atualmente funciona apenas para as expressões regulares)
+Quanto mais valores você fornecer, mais abrangente se tornará o processo de mapeamento e categorização, permitindo uma análise completa do conteúdo dos dados.
 
 ---
 
-Filtrando tipos de arquivo:
+### Filtrar tipos de dados:
+
+    python SearchParty.py --data-type cpf,rg
+
+Este comando especificará os tipos de dados a serem pesquisados durante o scan. Apenas dados que correspondam aos tipos especificados (e.g. números de CPF e RG) serão mapeados. (Esta opção atualmente funciona apenas para as expressões regulares)
+
+Os filtros devem ser separados por vírgulas e não devem ter espaços entre eles.
+
+Filtros: `cpf  rg  email  phone  nit  cns`
+
+---
+
+### Filtrar tipos de arquivos:
 
     python SearchParty.py --file-type pdf,docx
 
-Este comando especificará os tipos de arquivos a serem incluídos na varredura. Apenas arquivos com as extensões especificadas (por exemplo, PDF e DOCX) serão analisados para extração de dados.
+Este comando especificará os tipos de arquivos a serem incluídos no scan. Apenas arquivos com as extensões especificadas (e.g. PDF e DOCX) serão analisados para extração de dados.
+
+Os filtros devem ser separados por vírgulas e não devem ter espaços entre eles.
+
+Filtros: `txt  csv  bmp  png  gif  pdf  tiff  jpeg  webp  docx  xlsx  pptx  mail`
 
 ---
 
-Copiando arquivos:
+### Salvar resultados em um arquivo csv:
+
+    python SearchParty.py --to-csv | python SearchParty.py --to-csv /caminho/para/resultados.txt | python SearchParty.py --to-csv /caminho/para/resultados
+
+Este comando salvará os resultados do scan em valores separados por vírgula (csv). Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
+
+Deixar a opção com o valor padrão salvará os resultados em `HOSTNAME.csv` no diretório atual.
+
+Se você fornecer um arquivo de destino, os resultados do scan serão salvos diretamente nesse arquivo.
+
+Se você especificar uma pasta de destino, o arquivo de resultados será localizado sob esse diretório como: `HOSTNAME.csv`.
+
+Esta opção é útil para exportar resultados em um formato que pode ser facilmente aberto e manipulado em software de planilhas.
+
+---
+
+### Salvar resultados em um arquivo json:
+
+    python SearchParty.py --to-json | python SearchParty.py --to-json /caminho/para/resultados.txt | python SearchParty.py --to-json /caminho/para/resultados
+
+Este comando salvará os resultados do scan em json. Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
+
+Deixar a opção com o valor padrão salvará os resultados em `HOSTNAME.json` no diretório atual.
+
+Se você fornecer um arquivo de destino, os resultados do scan serão salvos diretamente nesse arquivo.
+
+Se você especificar uma pasta de destino, o arquivo de resultados será localizado sob esse diretório como: `HOSTNAME.json`.
+
+Esta opção é útil para exportar resultados em um formato estruturado que pode ser facilmente processado e analisado programaticamente.
+
+---
+
+### Salvar resultados em um arquivo de texto:
+
+    python SearchParty.py --to-text | python SearchParty.py --to-text /caminho/para/resultados.txt | python SearchParty.py --to-text /caminho/para/resultados
+
+Este comando salvará os resultados do scan em texto bruto. Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
+
+Deixar a opção com o valor padrão salvará os resultados em `HOSTNAME.txt` no diretório atual.
+
+Se você fornecer um arquivo de destino, os resultados do scan serão salvos diretamente nesse arquivo.
+
+Se você especificar uma pasta de destino, o arquivo de resultados será localizado sob esse diretório como: `HOSTNAME.txt`.
+
+Esta opção permite salvar resultados em um formato simples e legível, que pode ser facilmente visualizado e editado usando qualquer editor de texto.
+
+---
+
+### Salvar resultados em um banco de dados:
+
+    python SearchParty.py --to-database | python SearchParty.py --to-database /caminho/para/resultados.txt | python SearchParty.py --to-database /caminho/para/resultados
+
+Este comando salvará os resultados do scan em um banco de dados sqlite. Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
+
+Deixar a opção com o valor padrão salvará os resultados em `HOSTNAME.db` no diretório atual.
+
+Se você fornecer um arquivo de destino, os resultados do scan serão salvos diretamente nesse arquivo.
+
+Se você especificar uma pasta de destino, o arquivo de resultados será localizado sob esse diretório como: `HOSTNAME.db`.
+
+Esta opção é particularmente útil para armazenar resultados de maneira estruturada e escalável, permitindo uma gestão eficiente dos dados e análise utilizando sistemas de gerenciamento de banco de dados.
+
+Se você estiver usando o SearchParty em vários hosts, é altamente recomendável deixar o nome do banco de dados como o valor padrão. Isso torna mais fácil identificar qual banco de dados está associado a cada máquina.
+
+---
+
+### Copiar arquivos:
 
     python SearchParty.py --copy-files /caminho/para/destino
 
-Este comando copiará arquivos contendo dados extraídos para o diretório de destino especificado `/caminho/para/destino`. Os arquivos originais permanecerão inalterados, e cópias contendo dados relevantes serão criadas no diretório de destino.
+Este comando copiará arquivos contendo PII/dados sensíveis para o destino especificado `/caminho/para/destino`.
+
+Os arquivos originais permanecerão inalterados, e cópias contendo dados relevantes serão criadas no diretório de destino em `CopiedFiles/`.
 
 ---
 
-Movendo arquivos:
+### Mover arquivos:
 
     python SearchParty.py --move-files /caminho/para/destino
 
-Este comando moverá arquivos contendo dados extraídos para o diretório de destino especificado `/caminho/para/destino`. Os arquivos originais serão excluídos de sua localização atual e movidos para o diretório de destino.
+Este comando moverá arquivos contendo PII/dados sensíveis para o destino especificado `/caminho/para/destino`.
+
+Os arquivos originais serão excluídos de sua localização atual e movidos para o diretório de destino em `MovedFiles/`.
 
 ---
 
-Excluindo arquivos:
+### Excluir arquivos:
 
     python SearchParty.py --delete-files
 
-Este comando excluirá arquivos do sistema de arquivos após extrair dados deles. Tenha cuidado ao usar esta opção, pois ela removerá permanentemente arquivos contendo dados extraídos do sistema de arquivos.
+Este comando excluirá os arquivos que contêm PII/dados sensíveis.
 
+Tome cuidado ao usar esta opção, pois ela removerá permanentemente os arquivos do sistema de arquivos.
+
+---
+
+### Desativar formatação de cores:
+
+    python SearchParty.py --no-colors
+
+Use esta opção para desativar a formatação de cores na saída.
+
+Isso pode ser útil em ambientes onde a formatação de cores não é suportada ou preferida.
+
+---
+
+### Habilitar reconhecimento óptico de caracteres:
+
+    python SearchParty.py --enable-ocr
+
+Esta opção ativa o reconhecimento óptico de caracteres (OCR). Esta funcionalidade permite que o programa analise texto dentro de imagens.
+
+O programa tentará localizar automaticamente o executavel Tesseract no seu sistema.
+
+---
 ## Outro
 
 Uma Interface Gráfica (GUI) está atualmente em desenvolvimento como uma alternativa à interface de linha de comando (CLI). Esta opção tem como objetivo fornecer uma experiência mais intuitiva e amigável ao usuário, simplificando o processo de escaneamento, análise e gerenciamento de dados.
