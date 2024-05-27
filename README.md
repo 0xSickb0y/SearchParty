@@ -59,6 +59,14 @@ Additionally, the tool provides practical file management features, enabling use
 
     - Insufficient permissions may lead to unexpected behavior during operations, resulting in potential errors or incomplete tasks.
 
+6. Languages
+
+    - SearchParty is designed to focus on data specific to Brazilian Portuguese.
+
+    - This branch was created for users who feel more confortable using the tool in English (US).
+
+    - If you want the version in Portuguese, use the [pt-br](https://github.com/0xSickb0y/SearchParty/tree/pt-br) branch.
+
 ##  Supported File Extensions
 
 - **.txt**: text/plain
@@ -131,7 +139,7 @@ Additionally, the tool provides practical file management features, enabling use
     
     python SearchParty.py -D /path/to/directory
 
-This command will scan through the specified directory and analyze the content of all files within it. Any data matching the predefined search patterns will be extracted and categorized accordingly.
+This command will scan through the specified directory and analyze the content of all files within it. Any data matching the predefined search patterns will mapped accordingly.
 
 The `-D` option can be used multiple times (i.e. scan multiple directories at once)
 
@@ -141,7 +149,7 @@ The `-D` option can be used multiple times (i.e. scan multiple directories at on
 
     python SearchParty.py -F /path/to/myfile.txt
 
-This command will scan the specific file `myfile.txt` and analyze its content. The tool will extract any data matching the predefined search patterns found within the file.
+This command will scan the specific file `myfile.txt` and analyze its content. Any data matching the predefined search patterns will mapped accordingly.
 
 The `-F` option can be used multiple times (i.e. scan multiple files at once)
 
@@ -151,7 +159,7 @@ The `-F` option can be used multiple times (i.e. scan multiple files at once)
 
     python SearchParty.py -sV 'John Doe' '47.283.723-0'
 
-This command will search for specific values ('John Doe' and '47.283.723-0') within the content of files. If any matches are found, the tool will extract and categorize the corresponding data.
+This command will search for specific values ('John Doe' and '47.283.723-0') within the content of files. If any matches are found, the tool will map the corresponding data.
 
 This option is particularly useful for mapping data related to a specific individual, identifying sensitive information such as personal names, identification numbers, or any other predefined data patterns.
 
@@ -164,7 +172,7 @@ The more values you provide, the more comprehensive the mapping and categorizati
     python SearchParty.py --data-type cpf,rg
 
 
-This command will specify the data types to search for during the scan. Only data matching the specified types (e.g., CPF and RG numbers) will be extracted and categorized. (This option currently works only for the regular expressions)
+This command will specify the data types to search for during the scan. Only data matching the specified types (e.g., CPF and RG numbers) will be mapped. (This option currently works only for the regular expressions)
 
 The filters must be separated by commas and should not have any spaces in between.
 
