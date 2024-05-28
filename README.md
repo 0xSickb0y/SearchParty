@@ -194,7 +194,7 @@ Filters: `txt  csv  bmp  png  gif  pdf  tiff  jpeg  webp  docx  xlsx  pptx  mail
 
 ### Save results to a csv file:
 
-    python SearchParty.py --to-csv | python SearchParty.py --to-csv /path/to/results.txt | python SearchParty.py --to-csv /path/to/results
+    python SearchParty.py --to-csv | python SearchParty.py --to-csv /path/to/results.csv | python SearchParty.py --to-csv /path/to/results
 
 This command will save the scan results in comma separated values. You can specify a destination folder, a destination file, or leave it empty.
 
@@ -210,7 +210,7 @@ This option is useful for exporting results in a format that can be easily opene
 
 ### Save results to a json file:
 
-    python SearchParty.py --to-json | python SearchParty.py --to-json /path/to/results.txt | python SearchParty.py --to-json /path/to/results
+    python SearchParty.py --to-json | python SearchParty.py --to-json /path/to/results.json | python SearchParty.py --to-json /path/to/results
 
 This command will save the scan results in json. You can specify a destination folder, a destination file, or leave it empty.
 
@@ -242,7 +242,7 @@ This option allows for saving results in a simple, human-readable format, which 
 
 ### Save results to a database:
 
-    python SearchParty.py --to-database | python SearchParty.py --to-database /path/to/results.txt | python SearchParty.py --to-database /path/to/results
+    python SearchParty.py --to-database | python SearchParty.py --to-database /path/to/results.db | python SearchParty.py --to-database /path/to/results
 
 This command will save the scan results in sqlite database. You can specify a destination folder, a destination file, or leave it empty.
 
