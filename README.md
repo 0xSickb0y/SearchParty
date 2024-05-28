@@ -27,7 +27,7 @@ Additionally, the tool provides practical file management features, enabling use
 
     - On Windows systems, it is recommended to use the [python-magic-bin](https://pypi.org/project/python-magic-bin/) module, which provides a Python interface to libmagic using ctypes.
 
-    - A requirements file has already been created for both cases:
+    - A _requirements_ file has already been created for both cases:
         
         `requirements_UNIX.txt`
         
