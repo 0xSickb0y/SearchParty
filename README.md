@@ -135,7 +135,7 @@ Além disso, a ferramenta oferece recursos práticos de gerenciamento de arquivo
     
     python SearchParty.py -D /caminho/para/diretorio
 
-Este comando percorre o diretório especificado e analisa o conteúdo de todos os arquivos contidos nele. Quaisquer dados que correspondam aos padrões de pesquisa predefinidos serão mapeados adequadamente.
+Esse comando percorre o diretório especificado e analisa o conteúdo de todos os arquivos contidos nele. Quaisquer dados que correspondam aos padrões de pesquisa predefinidos serão mapeados adequadamente.
 
 A opção `-D` pode ser usada várias vezes (i.e. escaneie vários diretórios de uma vez).
 
@@ -145,7 +145,7 @@ A opção `-D` pode ser usada várias vezes (i.e. escaneie vários diretórios d
 
     python SearchParty.py -F /caminho/para/meuarquivo.txt
 
-Este comando escaneia o arquivo específico `meuarquivo.txt` e analisará seu conteúdo. Quaisquer dados que correspondam aos padrões de pesquisa predefinidos serão mapeados adequadamente.
+Esse comando escaneia o arquivo específico `meuarquivo.txt` e analisa seu conteúdo. Quaisquer dados que correspondam aos padrões de pesquisa predefinidos serão mapeados adequadamente.
 
 A opção `-F` pode ser usada várias vezes (i.e. escaneie vários arquivos de uma vez).
 
@@ -155,9 +155,9 @@ A opção `-F` pode ser usada várias vezes (i.e. escaneie vários arquivos de u
 
     python SearchParty.py -sV 'João da Silva' '47.283.723-0'
 
-Este comando buscará valores específicos ('João da Silva' e '47.283.723-0') dentro do conteúdo dos arquivos. Se houver correspondências, a ferramenta mapeará os dados correspondentes.
+Esse comando busca valores específicos ('João da Silva' e '47.283.723-0') dentro do conteúdo dos arquivos. Se houver correspondências, a ferramenta mapeará os dados correspondentes.
 
-Esta opção é particularmente útil para mapear dados relacionados a um indivíduo específico, identificando informações sensíveis como nomes pessoais, números de identificação ou quaisquer outros padrões de dados predefinidos.
+Essa opção é particularmente útil para mapear dados relacionados a um indivíduo específico, identificando informações sensíveis como nomes pessoais, números de identificação ou quaisquer outros padrões de dados predefinidos.
 
 Quanto mais valores você fornecer, mais abrangente se tornará o processo de mapeamento e categorização, permitindo uma análise completa do conteúdo dos dados.
 
@@ -167,7 +167,7 @@ Quanto mais valores você fornecer, mais abrangente se tornará o processo de ma
 
     python SearchParty.py --data-type cpf,rg
 
-Este comando especificará os tipos de dados a serem pesquisados durante o scan. Apenas dados que correspondam aos tipos especificados (e.g. números de CPF e RG) serão mapeados. (Esta opção atualmente funciona apenas para as expressões regulares)
+Esse comando especifica os tipos de dados a serem pesquisados durante o scan. Apenas dados que correspondam aos tipos especificados (e.g. números de CPF e RG) serão mapeados. (Essa opção atualmente funciona apenas para as expressões regulares)
 
 Os filtros devem ser separados por vírgulas e não devem ter espaços entre eles.
 
@@ -179,7 +179,7 @@ Filtros: `cpf  rg  email  phone  nit  cns`
 
     python SearchParty.py --file-type pdf,docx
 
-Este comando especificará os tipos de arquivos a serem incluídos no scan. Apenas arquivos com as extensões especificadas (e.g. PDF e DOCX) serão analisados para extração de dados.
+Esse comando especifica os tipos de arquivos a serem incluídos no scan. Apenas arquivos com as extensões especificadas (e.g. PDF e DOCX) serão analisados para extração de dados.
 
 Os filtros devem ser separados por vírgulas e não devem ter espaços entre eles.
 
@@ -189,33 +189,33 @@ Filtros: `txt  csv  bmp  png  gif  pdf  tiff  jpeg  webp  docx  xlsx  pptx  mail
 
 ### Salvar resultados em um arquivo csv:
 
-    python SearchParty.py --to-csv | python SearchParty.py --to-csv /caminho/para/resultados.txt | python SearchParty.py --to-csv /caminho/para/resultados
+    python SearchParty.py --to-csv | python SearchParty.py --to-csv /caminho/para/resultados.csv | python SearchParty.py --to-csv /caminho/para/resultados
 
-Este comando salvará os resultados do scan em valores separados por vírgula (csv). Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
+Esse comando salva os resultados do scan em valores separados por vírgula (csv). Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
 
-Deixar a opção com o valor padrão salvará os resultados em `HOSTNAME.csv` no diretório atual.
+Deixar a opção com o valor padrão salva os resultados em `HOSTNAME.csv` no diretório atual.
 
 Se você fornecer um arquivo de destino, os resultados do scan serão salvos diretamente nesse arquivo.
 
 Se você especificar uma pasta de destino, o arquivo de resultados será localizado sob esse diretório como: `HOSTNAME.csv`.
 
-Esta opção é útil para exportar resultados em um formato que pode ser facilmente aberto e manipulado em software de planilhas.
+Essa opção é útil para exportar resultados em um formato que pode ser facilmente aberto e manipulado em software de planilhas.
 
 ---
 
 ### Salvar resultados em um arquivo json:
 
-    python SearchParty.py --to-json | python SearchParty.py --to-json /caminho/para/resultados.txt | python SearchParty.py --to-json /caminho/para/resultados
+    python SearchParty.py --to-json | python SearchParty.py --to-json /caminho/para/resultados.json | python SearchParty.py --to-json /caminho/para/resultados
 
-Este comando salvará os resultados do scan em json. Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
+Esse comando salvará os resultados do scan em json. Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
 
-Deixar a opção com o valor padrão salvará os resultados em `HOSTNAME.json` no diretório atual.
+Deixar a opção com o valor padrão salva os resultados em `HOSTNAME.json` no diretório atual.
 
 Se você fornecer um arquivo de destino, os resultados do scan serão salvos diretamente nesse arquivo.
 
 Se você especificar uma pasta de destino, o arquivo de resultados será localizado sob esse diretório como: `HOSTNAME.json`.
 
-Esta opção é útil para exportar resultados em um formato estruturado que pode ser facilmente processado e analisado programaticamente.
+Essa opção é útil para exportar resultados em um formato estruturado que pode ser facilmente processado e analisado programaticamente.
 
 ---
 
@@ -223,31 +223,31 @@ Esta opção é útil para exportar resultados em um formato estruturado que pod
 
     python SearchParty.py --to-text | python SearchParty.py --to-text /caminho/para/resultados.txt | python SearchParty.py --to-text /caminho/para/resultados
 
-Este comando salvará os resultados do scan em texto bruto. Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
+Esse comando salvará os resultados do scan em texto bruto. Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
 
-Deixar a opção com o valor padrão salvará os resultados em `HOSTNAME.txt` no diretório atual.
+Deixar a opção com o valor padrão salva os resultados em `HOSTNAME.txt` no diretório atual.
 
 Se você fornecer um arquivo de destino, os resultados do scan serão salvos diretamente nesse arquivo.
 
 Se você especificar uma pasta de destino, o arquivo de resultados será localizado sob esse diretório como: `HOSTNAME.txt`.
 
-Esta opção permite salvar resultados em um formato simples e legível, que pode ser facilmente visualizado e editado usando qualquer editor de texto.
+Essa opção permite salvar resultados em um formato simples e legível, que pode ser facilmente visualizado e editado usando qualquer editor de texto.
 
 ---
 
 ### Salvar resultados em um banco de dados:
 
-    python SearchParty.py --to-database | python SearchParty.py --to-database /caminho/para/resultados.txt | python SearchParty.py --to-database /caminho/para/resultados
+    python SearchParty.py --to-database | python SearchParty.py --to-database /caminho/para/resultados.db | python SearchParty.py --to-database /caminho/para/resultados
 
-Este comando salvará os resultados do scan em um banco de dados sqlite. Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
+Esse comando salvará os resultados do scan em um banco de dados sqlite. Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
 
-Deixar a opção com o valor padrão salvará os resultados em `HOSTNAME.db` no diretório atual.
+Deixar a opção com o valor padrão salva os resultados em `HOSTNAME.db` no diretório atual.
 
 Se você fornecer um arquivo de destino, os resultados do scan serão salvos diretamente nesse arquivo.
 
 Se você especificar uma pasta de destino, o arquivo de resultados será localizado sob esse diretório como: `HOSTNAME.db`.
 
-Esta opção é particularmente útil para armazenar resultados de maneira estruturada e escalável, permitindo uma gestão eficiente dos dados e análise utilizando sistemas de gerenciamento de banco de dados.
+Essa opção é particularmente útil para armazenar resultados de maneira estruturada e escalável, permitindo uma gestão eficiente dos dados e análise utilizando sistemas de gerenciamento de banco de dados.
 
 Se você estiver usando o SearchParty em vários hosts, é altamente recomendável deixar o nome do banco de dados como o valor padrão. Isso torna mais fácil identificar qual banco de dados está associado a cada máquina.
 
@@ -257,7 +257,7 @@ Se você estiver usando o SearchParty em vários hosts, é altamente recomendáv
 
     python SearchParty.py --copy-files /caminho/para/destino
 
-Este comando copiará arquivos contendo PII/dados sensíveis para o destino especificado `/caminho/para/destino`.
+Esse comando copiará arquivos contendo PII/dados sensíveis para o destino especificado `/caminho/para/destino`.
 
 Os arquivos originais permanecerão inalterados, e cópias contendo dados relevantes serão criadas no diretório de destino em `CopiedFiles/`.
 
@@ -267,7 +267,7 @@ Os arquivos originais permanecerão inalterados, e cópias contendo dados releva
 
     python SearchParty.py --move-files /caminho/para/destino
 
-Este comando moverá arquivos contendo PII/dados sensíveis para o destino especificado `/caminho/para/destino`.
+Esse comando moverá arquivos contendo PII/dados sensíveis para o destino especificado `/caminho/para/destino`.
 
 Os arquivos originais serão excluídos de sua localização atual e movidos para o diretório de destino em `MovedFiles/`.
 
@@ -277,9 +277,9 @@ Os arquivos originais serão excluídos de sua localização atual e movidos par
 
     python SearchParty.py --delete-files
 
-Este comando excluirá os arquivos que contêm PII/dados sensíveis.
+Esse comando excluirá os arquivos que contêm PII/dados sensíveis.
 
-Tome cuidado ao usar esta opção, pois ela removerá permanentemente os arquivos do sistema de arquivos.
+Exerça cuidado ao usar essa opção, pois ela removerá permanentemente os arquivos do sistema de arquivos.
 
 ---
 
@@ -287,7 +287,7 @@ Tome cuidado ao usar esta opção, pois ela removerá permanentemente os arquivo
 
     python SearchParty.py --no-colors
 
-Use esta opção para desativar a formatação de cores na saída.
+Essa opção desativa a formatação de cores na saída.
 
 Isso pode ser útil em ambientes onde a formatação de cores não é suportada ou preferida.
 
@@ -297,7 +297,7 @@ Isso pode ser útil em ambientes onde a formatação de cores não é suportada 
 
     python SearchParty.py --enable-ocr
 
-Esta opção ativa o reconhecimento óptico de caracteres (OCR). Esta funcionalidade permite que o programa analise texto dentro de imagens.
+Essa opção ativa o reconhecimento óptico de caracteres (OCR). Essa funcionalidade permite que o programa analise texto dentro de imagens.
 
 O programa tentará localizar automaticamente o executavel Tesseract no seu sistema.
 
