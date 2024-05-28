@@ -29,7 +29,7 @@ Além disso, a ferramenta oferece recursos práticos de gerenciamento de arquivo
 
     - Em sistemas Windows, é recomendado usar o módulo [python-magic-bin](https://pypi.org/project/python-magic-bin/), que fornece uma interface Python para libmagic usando ctypes.
 
-    - Um arquivo requirements já foi criado para ambos os casos:
+    - Um arquivo _requirements_ já foi criado para ambos os casos:
         
         `requirements_UNIX.txt`
         
