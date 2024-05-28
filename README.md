@@ -98,7 +98,7 @@ Além disso, a ferramenta oferece recursos práticos de gerenciamento de arquivo
 - **números de telefone**
 - **Grupos étnicos**
 - **Informações financeiras**
-- **Informações legais**
+- **Informações jurídicas**
 - **Informações médicas**
 - **Preferências políticas**
 - **Documentos de veículo**
