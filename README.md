@@ -67,7 +67,7 @@ Além disso, a ferramenta oferece recursos práticos de gerenciamento de arquivo
 
     - Uma branch foi criada para usuários que se sentem mais confortáveis usando a ferramenta em inglês (EUA).
 
-    - Se você deseja a versão em inglês, use o branch [en-us](https://github.com/0xSickb0y/SearchParty/tree/en-us).
+    - Se você deseja a versão em inglês, use a branch [en-us](https://github.com/0xSickb0y/SearchParty/tree/en-us).
 
 
 ## Extensões de arquivo suportadas
@@ -94,8 +94,8 @@ Além disso, a ferramenta oferece recursos práticos de gerenciamento de arquivo
 - **Registro geral**
 - **Número de identificação do trabalhador**
 - **Cartão nacional de saúde**
-- **endereços de e-mail**
-- **números de telefone**
+- **Endereços de e-mail**
+- **Números de telefone**
 - **Grupos étnicos**
 - **Informações financeiras**
 - **Informações jurídicas**
