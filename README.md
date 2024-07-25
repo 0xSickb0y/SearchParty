@@ -45,7 +45,7 @@ Additionally, the tool provides practical file management features, enabling use
 
     - Certain terminal environments may not support Colorama for color formatting.
 
-    - you can disable it by using the `--no-colors` option.
+    - You can disable it by using the `--no-colors` option.
 
 4. Export Operations
 
@@ -88,9 +88,9 @@ Additionally, the tool provides practical file management features, enabling use
 
 - **CPF** (Social Security Number)
 - **RG** (General Registration)
-- **NIT** (Employee ID)
+- **NIT** (Worker registration number)
 - **CNS** (National Health Card)
-- **Email Dddresses**
+- **Email Addresses**
 - **Phone Numbers**
 - **Ethnic Groups**
 - **Financial Information**
