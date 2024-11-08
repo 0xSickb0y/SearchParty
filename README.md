@@ -129,6 +129,8 @@ Além disso, a ferramenta oferece recursos práticos de gerenciamento de arquivo
 
 ## Uso
 
+![1716864563086](https://github.com/user-attachments/assets/959d2de2-698b-4dda-9738-e71efacd2351)
+
 ---
 
 ### Escanear um diretório:
