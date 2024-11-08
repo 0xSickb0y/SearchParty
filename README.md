@@ -133,6 +133,8 @@ Additionally, the tool provides practical file management features, enabling use
 
 ## Usage
 
+![1716864563086](https://github.com/user-attachments/assets/0f5c780d-fcea-4e8a-80c7-58004f3ab0a9)
+
 ---
 
 ### Scanning a directory:
