@@ -4,7 +4,7 @@ import os
 import time
 import argparse
 import datetime
-from scripts import main
+from src import main
 
 banner = r'''
    _____                      __       ____             __
