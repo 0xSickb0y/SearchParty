@@ -69,25 +69,23 @@ def results_information(args, colors, data_found):
 
 
 def export_output(args, colors, supported_files, data_found, data_indexes, error_log):
-    print(f'{result_stats(args, colors, supported_files, data_found, data_indexes, error_log)}\n')
-    export_option = []
-    if args.csv:
-        export_to_csv(args, data_found)
-        export_option.append(args.csv)
-    if args.json:
-        export_to_json(args, data_found)
-        export_option.append(args.json)
-    if args.text:
-        export_to_text(args, data_found)
-        export_option.append(args.text)
-    if args.database:
-        export_to_database(args, data_found)
-        export_option.append(args.database)
-    print(f"Salvando resultados em {display_style(', '.join(export_option), colors)}\n")
+    export_functions = {
+        'csv': export_to_csv,
+        'json': export_to_json,
+        'txt': export_to_text,
+        'db': export_to_database
+    }
+
+    dst_path = args.save["path"]
+    for file_type in args.save['types']:
+        export_func = export_functions[file_type]
+        export_func(args, dst_path, data_found)
+
+    print(f"Salvando resultados em {display_style(dst_path, colors)}")
 
 
 def console_output(args, colors, supported_files, data_found, data_indexes, error_log):
-    print("\n" + display_alert("Nenhum arquivo de saída especificado, mostrando os resultados no terminal", colors))
+    print("\n" + display_alert("Extração completa, mostrando os resultados no terminal", colors))
     time.sleep(5)
     results_information(args, colors, data_found)
     print(f'{result_stats(args, colors, supported_files, data_found, data_indexes, error_log)}\n')
@@ -103,7 +101,6 @@ def console_output(args, colors, supported_files, data_found, data_indexes, erro
 
 
 def search_results(args, colors, supported_files, data_found, data_indexes, error_log):
-    if args.csv or args.json or args.text or args.database:
+    console_output(args, colors, supported_files, data_found, data_indexes, error_log)
+    if args.save:
         export_output(args, colors, supported_files, data_found, data_indexes, error_log)
-    else:
-        console_output(args, colors, supported_files, data_found, data_indexes, error_log)

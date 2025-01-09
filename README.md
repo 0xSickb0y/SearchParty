@@ -41,17 +41,21 @@ Além disso, a ferramenta oferece recursos práticos de gerenciamento de arquivo
 
     - Certifique-se de que o Tesseract está instalado e configurado corretamente no seu sistema antes de utilizar as capacidades de OCR.
 
-    - Para habilitar a funcionalidade OCR, use a opção `--enable-ocr`.
+    - Para habilitar a funcionalidade OCR, use a opção `-ocr`.
 
 3. Formatação de Cores
 
     - Certos ambientes de terminal podem não suportar o Colorama para formatação de cores.
 
-    - Você pode desativar essa funcionalidade usando a opção `--no-colors`.
+    - Você pode desativar essa funcionalidade usando a opção `-dcf`.
 
 4. Operações de Exportação
 
-    - Antes de realizar quaisquer operações de exportação, o SearchParty verifica as permissões nos caminhos de destino.
+    - Antes de realizar quaisquer operações de exportação, o SearchParty verifica as permissões nos caminhos de destino: 
+
+        1. O diretório onde o programa está localizado
+        2. O diretório _home_ do usuário atual
+        3. O diretório _Temp_
 
     - Certifique-se de que o destino possui permissões de escrita antes de tentar exportar os resultados.
 
@@ -92,8 +96,6 @@ Além disso, a ferramenta oferece recursos práticos de gerenciamento de arquivo
 
 - **Cadastro de pessoa física**
 - **Registro geral**
-- **Número de identificação do trabalhador**
-- **Cartão nacional de saúde**
 - **Endereços de e-mail**
 - **Números de telefone**
 - **Grupos étnicos**
@@ -110,52 +112,47 @@ Além disso, a ferramenta oferece recursos práticos de gerenciamento de arquivo
 ## Opções
 
 ```
-  -h, --help            show this help message and exit
-  -F path               escanear arquivo
-  -D path               escanear diretório
-  -sV  [ ...]           procurar valores específicos
-  --data-type type      filtrar tipo de dados
-  --file-type type      filtrar tipo de arquivos
-  --to-csv [name]       salvar resultados em csv
-  --to-json [name]      salvar resultados em json
-  --to-text [name]      salvar resultados em texto
-  --to-database [name]  salvar resultados em um banco de dados
-  --copy-files [dst]    copiar arquivos para outro local
-  --move-files [dst]    mover arquivos para outro local
-  --delete-files        excluir arquivos do sistema de arquivos
-  --no-colors           desativar a formatação de cores na saída
-  --enable-ocr          ativar o reconhecimento óptico de caracteres
+    -h, --help        show this help message and exit
+    -d path           escanear diretório
+    -f path           escanear arquivo
+    -dcf              desativar a formatação de cores na saída padrão
+    -ocr              ativar o reconhecimento óptico de caracteres
+    -find  [ ...]     procurar valores específicos
+    -save db,csv ...  salvar resultados em [db, csv, txt, json]
+    -copy [dst]       copiar arquivos para outro local
+    -move [dst]       mover arquivos para outro local
+    -delete           excluir arquivos do sistema de arquivos
+    -datatype type    filtrar tipo de dados
+    -filetype type    filtrar tipo de arquivos
 ```
 
 ## Uso
-
-![1716864563086](https://github.com/user-attachments/assets/959d2de2-698b-4dda-9738-e71efacd2351)
 
 ---
 
 ### Escanear um diretório:
     
-    python SearchParty.py -D /caminho/para/diretorio
+    python SearchParty.py -d /caminho/para/diretorio
 
 Esse comando percorre o diretório especificado e analisa o conteúdo de todos os arquivos contidos nele. Quaisquer dados que correspondam aos padrões de pesquisa predefinidos serão mapeados adequadamente.
 
-A opção `-D` pode ser usada várias vezes (i.e. escaneie vários diretórios de uma vez).
+A opção `-d` pode ser usada várias vezes (i.e. escaneie vários diretórios de uma vez).
 
 ---
 
 ### Escanear um arquivo:
 
-    python SearchParty.py -F /caminho/para/meuarquivo.txt
+    python SearchParty.py -f /caminho/para/meuarquivo.txt
 
 Esse comando escaneia o arquivo específico `meuarquivo.txt` e analisa seu conteúdo. Quaisquer dados que correspondam aos padrões de pesquisa predefinidos serão mapeados adequadamente.
 
-A opção `-F` pode ser usada várias vezes (i.e. escaneie vários arquivos de uma vez).
+A opção `-f` pode ser usada várias vezes (i.e. escaneie vários arquivos de uma vez).
 
 ---
 
 ### Buscar valores específicos:
 
-    python SearchParty.py -sV 'João da Silva' '47.283.723-0'
+    python SearchParty.py -find 'João da Silva' '47.283.723-0'
 
 Esse comando busca valores específicos ('João da Silva' e '47.283.723-0') dentro do conteúdo dos arquivos. Se houver correspondências, a ferramenta mapeará os dados correspondentes.
 
@@ -167,19 +164,19 @@ Quanto mais valores você fornecer, mais abrangente se tornará o processo de ma
 
 ### Filtrar tipos de dados:
 
-    python SearchParty.py --data-type cpf,rg
+    python SearchParty.py -datatype cpf,rg
 
 Esse comando especifica os tipos de dados a serem pesquisados durante o scan. Apenas dados que correspondam aos tipos especificados (e.g. números de CPF e RG) serão mapeados. (Essa opção atualmente funciona apenas para as expressões regulares)
 
 Os filtros devem ser separados por vírgulas e não devem ter espaços entre eles.
 
-Filtros: `cpf  rg  email  phone  nit  cns`
+Filtros: `cpf  rg  email  phone`
 
 ---
 
 ### Filtrar tipos de arquivos:
 
-    python SearchParty.py --file-type pdf,docx
+    python SearchParty.py -filetype pdf,docx
 
 Esse comando especifica os tipos de arquivos a serem incluídos no scan. Apenas arquivos com as extensões especificadas (e.g. PDF e DOCX) serão analisados para extração de dados.
 
@@ -189,75 +186,23 @@ Filtros: `txt  csv  bmp  png  gif  pdf  tiff  jpeg  webp  docx  xlsx  pptx  mail
 
 ---
 
-### Salvar resultados em um arquivo csv:
+### Exportando resultados:
 
-    python SearchParty.py --to-csv | python SearchParty.py --to-csv /caminho/para/resultados.csv | python SearchParty.py --to-csv /caminho/para/resultados
+    python SearchParty.py -save db,csv,txt,json
 
-Esse comando salva os resultados do scan em valores separados por vírgula (csv). Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
+Este comando salva os resultados do scan em um formato de arquivo de sua escolha [db, csv, txt, json]
 
-Deixar a opção com o valor padrão salva os resultados em `HOSTNAME.csv` no diretório atual.
+O programa verifica os seguintes diretórios para permissões na ordem listada:
 
-Se você fornecer um arquivo de destino, os resultados do scan serão salvos diretamente nesse arquivo.
-
-Se você especificar uma pasta de destino, o arquivo de resultados será localizado sob esse diretório como: `HOSTNAME.csv`.
-
-Essa opção é útil para exportar resultados em um formato que pode ser facilmente aberto e manipulado em software de planilhas.
-
----
-
-### Salvar resultados em um arquivo json:
-
-    python SearchParty.py --to-json | python SearchParty.py --to-json /caminho/para/resultados.json | python SearchParty.py --to-json /caminho/para/resultados
-
-Esse comando salvará os resultados do scan em json. Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
-
-Deixar a opção com o valor padrão salva os resultados em `HOSTNAME.json` no diretório atual.
-
-Se você fornecer um arquivo de destino, os resultados do scan serão salvos diretamente nesse arquivo.
-
-Se você especificar uma pasta de destino, o arquivo de resultados será localizado sob esse diretório como: `HOSTNAME.json`.
-
-Essa opção é útil para exportar resultados em um formato estruturado que pode ser facilmente processado e analisado programaticamente.
-
----
-
-### Salvar resultados em um arquivo de texto:
-
-    python SearchParty.py --to-text | python SearchParty.py --to-text /caminho/para/resultados.txt | python SearchParty.py --to-text /caminho/para/resultados
-
-Esse comando salvará os resultados do scan em texto bruto. Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
-
-Deixar a opção com o valor padrão salva os resultados em `HOSTNAME.txt` no diretório atual.
-
-Se você fornecer um arquivo de destino, os resultados do scan serão salvos diretamente nesse arquivo.
-
-Se você especificar uma pasta de destino, o arquivo de resultados será localizado sob esse diretório como: `HOSTNAME.txt`.
-
-Essa opção permite salvar resultados em um formato simples e legível, que pode ser facilmente visualizado e editado usando qualquer editor de texto.
-
----
-
-### Salvar resultados em um banco de dados:
-
-    python SearchParty.py --to-database | python SearchParty.py --to-database /caminho/para/resultados.db | python SearchParty.py --to-database /caminho/para/resultados
-
-Esse comando salvará os resultados do scan em um banco de dados sqlite. Você pode especificar uma pasta de destino, um arquivo de destino ou deixar vazio.
-
-Deixar a opção com o valor padrão salva os resultados em `HOSTNAME.db` no diretório atual.
-
-Se você fornecer um arquivo de destino, os resultados do scan serão salvos diretamente nesse arquivo.
-
-Se você especificar uma pasta de destino, o arquivo de resultados será localizado sob esse diretório como: `HOSTNAME.db`.
-
-Essa opção é particularmente útil para armazenar resultados de maneira estruturada e escalável, permitindo uma gestão eficiente dos dados e análise utilizando sistemas de gerenciamento de banco de dados.
-
-Se você estiver usando o SearchParty em vários hosts, é altamente recomendável deixar o nome do banco de dados como o valor padrão. Isso torna mais fácil identificar qual banco de dados está associado a cada máquina.
+1. O diretório onde o programa está localizado — default.
+2. O diretório _home_ do usuário atual($HOME ou %USERPROFILE%)
+3. O diretório _Temp_ — Um local de fallback, usado se os caminhos anteriores não estiverem disponíveis.
 
 ---
 
 ### Copiar arquivos:
 
-    python SearchParty.py --copy-files /caminho/para/destino
+    python SearchParty.py -copy /caminho/para/destino
 
 Esse comando copiará arquivos contendo PII/dados sensíveis para o destino especificado `/caminho/para/destino`.
 
@@ -267,7 +212,7 @@ Os arquivos originais permanecerão inalterados, e cópias contendo dados releva
 
 ### Mover arquivos:
 
-    python SearchParty.py --move-files /caminho/para/destino
+    python SearchParty.py -move /caminho/para/destino
 
 Esse comando moverá arquivos contendo PII/dados sensíveis para o destino especificado `/caminho/para/destino`.
 
@@ -277,7 +222,7 @@ Os arquivos originais serão excluídos de sua localização atual e movidos par
 
 ### Excluir arquivos:
 
-    python SearchParty.py --delete-files
+    python SearchParty.py -delete
 
 Esse comando excluirá os arquivos que contêm PII/dados sensíveis.
 
@@ -287,7 +232,7 @@ Exerça cuidado ao usar essa opção, pois ela removerá permanentemente os arqu
 
 ### Desativar formatação de cores:
 
-    python SearchParty.py --no-colors
+    python SearchParty.py -dcf
 
 Essa opção desativa a formatação de cores na saída.
 
@@ -297,13 +242,9 @@ Isso pode ser útil em ambientes onde a formatação de cores não é suportada 
 
 ### Habilitar reconhecimento óptico de caracteres:
 
-    python SearchParty.py --enable-ocr
+    python SearchParty.py -ocr
 
 Essa opção ativa o reconhecimento óptico de caracteres (OCR). Essa funcionalidade permite que o programa analise texto dentro de imagens.
 
 O programa tentará localizar automaticamente o executavel Tesseract no seu sistema.
 
----
-## Outro
-
-Uma Interface Gráfica (GUI) está atualmente em desenvolvimento como uma alternativa à interface de linha de comando (CLI). Esta opção tem como objetivo fornecer uma experiência mais intuitiva e amigável ao usuário, simplificando o processo de escaneamento, análise e gerenciamento de dados.

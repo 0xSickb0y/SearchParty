@@ -3,87 +3,80 @@
 import os
 import shutil
 
-
 def copy_files(args, data_found):
+    os.makedirs(args.copy, exist_ok=True)
 
-    os.makedirs(args.copy)
-    errors = set()
-    files_copied = False
+    processed_files = set()
 
     for file_list in data_found.values():
         if file_list:
             for info in file_list:
-                try:
-                    if args.findme:
-                        if not os.path.exists(os.path.join(args.copy, os.path.basename(info['file']))):
-                            shutil.copy(info['file'], args.copy)
+                file_path = info['file'] if args.findme else info
+
+                if file_path in processed_files:
+                    continue
+
+                processed_files.add(file_path)
+
+                if not os.access(file_path, os.R_OK):
+                    print(f"Permissões insuficientes para copiar: {file_path}")
+                else:
+                    dest_path = os.path.join(args.copy, os.path.basename(file_path))
+
+                    if not os.path.exists(dest_path):
+                        shutil.copy(file_path, args.copy)
                     else:
-                        if not os.path.exists(os.path.join(args.copy, os.path.basename(info))):
-                            shutil.copy(info, args.copy)
-                    files_copied = True
-                except Exception as error:
-                    error_type = type(error).__name__
-                    errors.add(error_type)
-
-    copied_message = f'\nConcluído!' if files_copied else ''
-
-    if errors:
-        copied_message += f'Errors foram encontrados ao copiar arquivos: {", ".join(errors)}'
-
-    print(f'{copied_message}\n')
+                        print(f"Arquivo já existe no destino: {dest_path}")
+    
+    print(f"\{len(processed_files)} arquivos copiados")
 
 
 def move_files(args, data_found):
+    os.makedirs(args.move, exist_ok=True)
 
-    os.makedirs(args.move)
-    errors = set()
-    files_moved = False
+    processed_files = set()
 
     for file_list in data_found.values():
         if file_list:
             for info in file_list:
-                try:
-                    if args.findme:
-                        if not os.path.exists(os.path.join(args.move, os.path.basename(info['file']))):
-                            shutil.move(info['file'], args.move)
+                file_path = info['file'] if args.findme else info
+
+                if file_path in processed_files:
+                    continue
+
+                processed_files.add(file_path)
+
+                if not os.access(file_path, os.W_OK):
+                    print(f"Permissões insuficientes para mover{file_path}")
+                else:
+                    dest_path = os.path.join(args.move, os.path.basename(file_path))
+
+                    if not os.path.exists(dest_path):
+                        shutil.move(file_path, args.move)
                     else:
-                        if not os.path.exists(os.path.join(args.move, os.path.basename(info))):
-                            shutil.move(info, args.move)
-                    files_moved = True
-                except Exception as error:
-                    error_type = type(error).__name__
-                    errors.add(error_type)
+                        print(f"Arquivo já existe no destino: {dest_path}")
 
-    moved_message = f'\nConcluído!' if files_moved else ''
-
-    if errors:
-        moved_message += f'Errors foram encontrados ao mover arquivos: {", ".join(errors)}'
-
-    print(f'{moved_message}\n')
-
+    print(f"\n{len(processed_files)} arquivos movidos")
 
 def delete_files(args, data_found):
-
-    errors = set()
+    processed_files = set()
 
     for file_list in data_found.values():
         if file_list:
             for info in file_list:
-                try:
-                    if args.findme:
-                        if os.path.exists(info['file']):
-                            os.remove(info['file'])
+                file_path = info['file'] if args.findme else info
+
+                if file_path in processed_files:
+                    continue
+
+                processed_files.add(file_path)
+
+                if not os.access(file_path, os.W_OK):
+                    print(f"Permissões insuficientes para excluir: {file_path}")
+                else:
+                    if os.path.exists(file_path):
+                        os.remove(file_path)
                     else:
-                        if os.path.exists(info):
-                            os.remove(info)
-                    files_deleted = True
-                except Exception as error:
-                    error_type = type(error).__name__
-                    errors.add(error_type)
+                        print(f"Falha ao remover: {file_path} (não encontrado)")
 
-    deleted_message = f'\nConcluído!' if files_deleted else ''
-
-    if errors:
-        deleted_message += f'Errors foram encontrados ao deletar arquivos: {", ".join(errors)}'
-
-    print(f'{deleted_message}\n')
+    print(f"\{len(processed_files)} arquivos removidos")

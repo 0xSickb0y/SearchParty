@@ -5,13 +5,13 @@ from .InitialSetup import initial_setup
 from .SearchResults import search_results
 from .ValidateArguments import validate_arguments
 from .InformationExtractor import information_extractor
-from .Utils.CustomExceptions import NoSupportedFiles, NoDataFound
+from .Utils.CustomExceptions import NoSupportedFiles, NoDataFound, WordlistNotFound
 
 
 def main(args, parser, colors):
     if len(sys.argv) == 1:
         parser.print_help()
-        sys.exit(1)
+        sys.exit(0)
     try:
         args, file_types, data_filters, tesseract_path = validate_arguments(args, colors)
         supported_files = initial_setup(args, colors, file_types)
@@ -20,8 +20,7 @@ def main(args, parser, colors):
 
     except (ValueError, FileNotFoundError, FileExistsError, PermissionError) as error:
         print(error)
-        parser.print_help()
         sys.exit(1)
-    except (NoSupportedFiles, NoDataFound) as custom:
+    except (NoSupportedFiles, NoDataFound,  WordlistNotFound) as custom:
         print(custom)
         sys.exit(0)
