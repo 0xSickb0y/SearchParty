@@ -1,7 +1,16 @@
 # -*- coding: utf-8 -*-
 
 import os
-from .ColorFormatting import display_negative
+from .ColorFormatting import display_negative, display_alert
+
+class WordlistNotFound(Exception):
+    def __init__(self, script_dir, colors=None):
+        self.script_dir = script_dir
+        self.colors = colors
+
+    def __str__(self):
+        message = f"Error: wordlists/ directory not found in: {self.script_dir}"
+        return f"{display_negative(message, self.colors)}"
 
 
 class NoSupportedFiles(Exception):

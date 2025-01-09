@@ -39,17 +39,21 @@ Additionally, the tool provides practical file management features, enabling use
 
     - Make sure you have Tesseract installed and properly configured on your system before utilizing OCR capabilities.
 
-    - To enable OCR functionality, use the `--enable-ocr` option.
+    - To enable OCR functionality, use the `-ocr` option.
 
 3. Color Formatting
 
     - Certain terminal environments may not support Colorama for color formatting.
 
-    - You can disable it by using the `--no-colors` option.
+    - You can disable it by using the `-dcf` option.
 
 4. Export Operations
 
-    - Before performing any export operations, SearchParty checks for permissions in the destination paths.
+    - Before performing any export operations, SearchParty checks for permissions in the  destination paths:
+
+        1. The directory where the program is located
+        2. The current user home directory
+        3. The Temp directory
 
     - Ensure that the destination has write permissions before trying to export results.
 
@@ -86,10 +90,8 @@ Additionally, the tool provides practical file management features, enabling use
 
 ## Supported Data Types
 
-- **CPF** (Social Security Number)
-- **RG** (General Registration)
-- **NIT** (Worker registration number)
-- **CNS** (National Health Card)
+- **CPF**
+- **RG**
 - **Email Addresses**
 - **Phone Numbers**
 - **Ethnic Groups**
@@ -114,52 +116,48 @@ Additionally, the tool provides practical file management features, enabling use
 ## Options
 
 ```
-  -h, --help            show this help message and exit
-  -F path               scan file
-  -D path               scan directory
-  -sV  [ ...]           search for specific values
-  --data-type type      data type filtering
-  --file-type type      file type filtering
-  --to-csv [name]       save results to csv
-  --to-json [name]      save results to json
-  --to-text [name]      save results to text
-  --to-database [name]  save results to a database
-  --copy-files [dst]    copy files to another location
-  --move-files [dst]    move files to another location
-  --delete-files        delete files from the file system
-  --no-colors           disable color formatting in the output
-  --enable-ocr          enable optical character recognition
+    -h, --help        show this help message and exit
+    -d path           scan directory
+    -f path           scan file
+    -dcf              disable color formatting in the output
+    -ocr              enable optical character recognition
+    -find  [ ...]     search for specific values
+    -save db,csv ...  export results to [db, csv, txt, json]
+    -copy [dst]       copy files to another location
+    -move [dst]       move files to another location
+    -delete           delete files with positive results
+    -datatype type    data type filtering
+    -filetype type    file type filtering
+
 ```
 
 ## Usage
-
-![1716864563086](https://github.com/user-attachments/assets/0f5c780d-fcea-4e8a-80c7-58004f3ab0a9)
 
 ---
 
 ### Scanning a directory:
     
-    python SearchParty.py -D /path/to/directory
+    python SearchParty.py -d /path/to/directory
 
 This command will scan through the specified directory and analyze the content of all files within it. Any data matching the predefined search patterns will mapped accordingly.
 
-The `-D` option can be used multiple times (i.e. scan multiple directories at once)
+The `-d` option can be used multiple times (i.e. scan multiple directories at once)
 
 ---
 
 ### Scanning a file:
 
-    python SearchParty.py -F /path/to/myfile.txt
+    python SearchParty.py -f /path/to/myfile.txt
 
 This command will scan the specific file `myfile.txt` and analyze its content. Any data matching the predefined search patterns will mapped accordingly.
 
-The `-F` option can be used multiple times (i.e. scan multiple files at once)
+The `-f` option can be used multiple times (i.e. scan multiple files at once)
 
 ---
 
 ### Search for specific values:
 
-    python SearchParty.py -sV 'John Doe' '47.283.723-0'
+    python SearchParty.py -find 'John Doe' '47.283.723-0'
 
 This command will search for specific values ('John Doe' and '47.283.723-0') within the content of files. If any matches are found, the tool will map the corresponding data.
 
@@ -171,98 +169,46 @@ The more values you provide, the more comprehensive the mapping and categorizati
 
 ### Filtering data types:
 
-    python SearchParty.py --data-type cpf,rg
+    python SearchParty.py -datatype cpf,rg
 
 
 This command will specify the data types to search for during the scan. Only data matching the specified types (e.g., CPF and RG numbers) will be mapped. (This option currently works only for the regular expressions)
 
 The filters must be separated by commas and should not have any spaces in between.
 
-Filters: `cpf  rg  email  phone  nit  cns`
+Filters: `cpf  rg  email  phone`
 
 ---
 
 ### Filtering file types:
 
-    python SearchParty.py --file-type pdf,docx
+    python SearchParty.py -filetype pdf,docx
 
 This command will specify the types of files to include in the scan. Only files with the specified extensions (e.g., PDF and DOCX) will be analyzed for data extraction.
 
-The filters must be separated by commas and should not have any spaces in between.
+The filters must be separated by commas and should not have any spaces in between, filtering for image types require OCR capabilites.
 
 Filters: `txt  csv  bmp  png  gif  pdf  tiff  jpeg  webp  docx  xlsx  pptx  mail`
 
 ---
 
-### Save results to a csv file:
+### Exporting results:
 
-    python SearchParty.py --to-csv | python SearchParty.py --to-csv /path/to/results.csv | python SearchParty.py --to-csv /path/to/results
+    python SearchParty.py -save db,csv,txt,json
 
-This command will save the scan results in comma separated values. You can specify a destination folder, a destination file, or leave it empty.
+This command will save the scan results to a file format of your choosing [db, csv, txt, json]
 
-Leaving the option as the default value will save the results to `HOSTNAME.csv` under the current directory.
+The program checks the following directories for permissions in the listed order:
 
-If you provide a destination file, the scan results will be saved directly to that file.
-
-If you specify a destination folder, the results file will be located under that directory as: `HOSTNAME.csv`.
-
-This option is useful for exporting results in a format that can be easily opened and manipulated in spreadsheet software.
-
----
-
-### Save results to a json file:
-
-    python SearchParty.py --to-json | python SearchParty.py --to-json /path/to/results.json | python SearchParty.py --to-json /path/to/results
-
-This command will save the scan results in json. You can specify a destination folder, a destination file, or leave it empty.
-
-Leaving the option as the default value will save the results to `HOSTNAME.json` under the current directory.
-
-If you provide a destination file, the scan results will be saved directly to that file.
-
-If you specify a destination folder, the results file will be located under that directory as: `HOSTNAME.json`.
-
-This option is useful for exporting results in a structured format that can be easily processed and analyzed programmatically.
-
----
-
-### Save results to a text file:
-
-    python SearchParty.py --to-text | python SearchParty.py --to-text /path/to/results.txt | python SearchParty.py --to-text /path/to/results
-
-This command will save the scan results in raw text. You can specify a destination folder, a destination file, or leave it empty.
-
-Leaving the option as the default value will save the results to `HOSTNAME.txt` under the current directory.
-
-If you provide a destination file, the scan results will be saved directly to that file.
-
-If you specify a destination folder, the results file will be located under that directory as: `HOSTNAME.txt`.
-
-This option allows for saving results in a simple, human-readable format, which can be easily viewed and edited using any text editor.
-
----
-
-### Save results to a database:
-
-    python SearchParty.py --to-database | python SearchParty.py --to-database /path/to/results.db | python SearchParty.py --to-database /path/to/results
-
-This command will save the scan results in sqlite database. You can specify a destination folder, a destination file, or leave it empty.
-
-Leaving the option as the default value will save the results to `HOSTNAME.db` under the current directory.
-
-If you provide a destination file, the scan results will be saved directly to that file.
-
-If you specify a destination folder, the results file will be located under that directory as: `HOSTNAME.db`.
-
-This option is particularly useful for storing results in a structured and scalable manner, allowing for efficient data management and analysis using database management systems.
-
-If you're using SearchParty on multiple hosts, it's highly recommended to leave the database name as the default value. This makes it easier to identify which database is associated with each machine.
+1. The directory where the program is located — This is the default location.
+2. The current user’s home directory ($HOME or %USERPROFILE%)
+3. The Temp directory — A fallback location, used if the previous paths are not available.
 
 ---
 
 ### Copying files:
 
-    python SearchParty.py --copy-files /path/to/destination
+    python SearchParty.py -copy /path/to/destination
 
 This command will copy files containing PII/Sensitive data to the specified destination `/path/to/destination`.
 
@@ -272,7 +218,7 @@ The original files will remain unchanged, and copies containing relevant data wi
 
 ### Moving files:
 
-    python SearchParty.py --move-files /path/to/destination
+    python SearchParty.py -move /path/to/destination
 
 
 This command will move files containing PII/Sensitive data to the specified destination `/path/to/destination`.
@@ -283,7 +229,7 @@ The original files will be deleted from their current location and moved to the 
 
 ### Deleting files:
 
-    python SearchParty.py --delete-files
+    python SearchParty.py -delete
 
 This command will delete the files that contain PII/Sensitive data.
 
@@ -293,7 +239,7 @@ Exercise caution when using this option, as it will permanently remove the files
 
 ### Disabling color formatting:
 
-    python SearchParty.py --no-colors
+    python SearchParty.py -dcf
 
     
 Use this option to disable color formatting in the output.
@@ -304,14 +250,10 @@ This can be useful in environments where color formatting is not supported or pr
 
 ### Enabling optical character recognition:
 
-    python SearchParty.py --enable-ocr
+    python SearchParty.py -ocr
 
 This option activates optical character recognition (OCR). This functionality allows the program to analyze text within images.
 
 SearchParty will automatically attempt to locate the Tesseract binary on your system, ensure that it is installed and properly configured for OCR to work effectively.
 
 ---
-
-## Outro
-
-A Graphical User Interface (GUI) is currently under development as an  alternative to the command-line interface (CLI). This option aims to provide a more intuitive and user-friendly experience, simplifying the process of scanning, analyzing, and managing data for users unfamiliar with the command-line.

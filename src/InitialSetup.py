@@ -3,6 +3,7 @@
 import os
 import time
 import psutil
+import getpass
 import platform
 import datetime
 from magic import from_file
@@ -47,7 +48,7 @@ def get_filesystem_size():
 
 def start_information(args, colors):
 
-    current_user = os.getlogin()
+    current_user = getpass.getuser()
     hostname = platform.node()
     fs_size = get_filesystem_size()
     operating_system = f'{platform.system()} {platform.release()} {platform.machine()}'
@@ -88,15 +89,18 @@ def process_file_argument(args):
 def process_directory_argument(args):
     supported_files_size = 0
     for argument in args.directory:
-        for path, dirs, files in os.walk(argument):
-            for filename in files:
-                full_path = os.path.abspath(os.path.join(path, filename))
-                supported_files_size += os.path.getsize(full_path)
-                for pattern_name, mime_type in file_patterns.items():
-                    if from_file(full_path, mime=True) == mime_type or guess_mime(full_path) == mime_type:
-                        if pattern_name not in supported_files:
-                            supported_files[pattern_name] = []
-                        supported_files[pattern_name].append(full_path)
+        try:
+            for path, dirs, files in os.walk(argument):
+                for filename in files:
+                    full_path = os.path.abspath(os.path.join(path, filename))
+                    supported_files_size += os.path.getsize(full_path)
+                    for pattern_name, mime_type in file_patterns.items():
+                        if from_file(full_path, mime=True) == mime_type or guess_mime(full_path) == mime_type:
+                            if pattern_name not in supported_files:
+                                supported_files[pattern_name] = []
+                            supported_files[pattern_name].append(full_path)
+        except PermissionError as error:
+            print(f"Insufficient permissions to read: {error.filename}")
 
     if len(supported_files) != 0:
         print(f"Directories Have {sum(len(value) for value in supported_files.values())} Supported Items. {convert_size(supported_files_size)}")

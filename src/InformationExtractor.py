@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 import re
 import csv
 import time
@@ -13,34 +14,37 @@ from pdfminer.high_level import extract_text
 from .Utils.ColorFormatting import display_info
 from .Utils.CustomExceptions import NoDataFound
 
+SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 wordlists = {}
 error_log = {}
 data_found = {}
 data_indexes = {}
 
-regex_patterns = {"CPF": re.compile(r'\b\d{9}/\d{2}\b|\b\d{3}\.\d{3}\.\d{3}-\d{2}\b'),
-                  "RG": re.compile(r'\b\d{2}\.\d{3}\.\d{3}-\d{1}\b'),
-                  "Email Addresses": re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'),
-                  "Phone Numbers": re.compile(r'(?:\+\d{1,3}\s)?(?:\(\d{2}\)|\d{2})\s?\b\d{5}-\d{4}\b'),
-                  "Employee IDs": re.compile(r'\d{3}\.\d{5}\.\d{2}-\d'),
-                  "National Health Card": re.compile(r'\d{3}[ .-]\d{4}[ .-]\d{4}[ .-]\d{4}')}
+regex_patterns = {
+    "CPF": re.compile(r'\b\d{9}/\d{2}\b|\b\d{3}\.\d{3}\.\d{3}-\d{2}\b'),
+    "RG": re.compile(r'\b\d{2}\.\d{3}\.\d{3}-\d{1}\b'),
+    "Email Addresses": re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'),
+    "Phone Numbers": re.compile(r'(?:\+\d{1,3}\s)?(?:\(\d{2}\)|\d{2})\s?\b\d{5}-\d{4}\b'),
+}
 
-wordlist_paths = ['wordlists/Ethnic Groups',
-                  'wordlists/Financial Information',
-                  'wordlists/Gender Orientation',
-                  'wordlists/Legal Information',
-                  'wordlists/Medical Records',
-                  'wordlists/Political Preferences',
-                  'wordlists/Property Information',
-                  'wordlists/Religion and Faith',
-                  'wordlists/Travel History',
-                  'wordlists/Vehicle Documents']
-
+wordlist_paths = [
+    os.path.join(SCRIPT_DIR, 'wordlists/Ethnic Groups'),
+    os.path.join(SCRIPT_DIR, 'wordlists/Financial Information'),
+    os.path.join(SCRIPT_DIR, 'wordlists/Gender Orientation'),
+    os.path.join(SCRIPT_DIR, 'wordlists/Legal Information'),
+    os.path.join(SCRIPT_DIR, 'wordlists/Medical Records'),
+    os.path.join(SCRIPT_DIR, 'wordlists/Political Preferences'),
+    os.path.join(SCRIPT_DIR, 'wordlists/Property Information'),
+    os.path.join(SCRIPT_DIR, 'wordlists/Religion and Faith'),
+    os.path.join(SCRIPT_DIR, 'wordlists/Travel History'),
+    os.path.join(SCRIPT_DIR, 'wordlists/Vehicle Documents')
+]
 
 def process_wordlists():
     for file_path in wordlist_paths:
         with open(file_path, 'r') as file:
-            wordlist = file_path.split('wordlists/')[1]
+            wordlist = os.path.basename(file_path)
             lines = [line.strip() for line in file.readlines()]
             wordlists[wordlist] = lines
 
@@ -352,6 +356,7 @@ def process_extraction_methods(args, colors, file_types, data_filters, supported
                 method(args, supported_files[file_type], tesseract_path)
 
     if not data_found.keys():
+        print()
         raise NoDataFound(args, colors)
 
 
