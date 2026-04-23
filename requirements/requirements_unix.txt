@@ -4,7 +4,7 @@ colorama==0.4.6
 cryptography==46.0.7
 et_xmlfile==2.0.0
 filetype==1.2.0
-lxml==5.3.0
+lxml==6.1.0
 openpyxl==3.1.5
 packaging==24.2
 pdfminer.six==20240706
