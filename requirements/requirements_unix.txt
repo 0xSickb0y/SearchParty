@@ -8,7 +8,7 @@ lxml==5.3.0
 openpyxl==3.1.5
 packaging==24.2
 pdfminer.six==20240706
-pillow==12.1.1
+pillow==12.2.0
 psutil==6.1.1
 pycparser==2.22
 pytesseract==0.3.13
