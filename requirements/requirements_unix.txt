@@ -1,7 +1,7 @@
 cffi==1.17.1
 charset-normalizer==3.4.1
 colorama==0.4.6
-cryptography==46.0.7
+cryptography==50.0.0
 et_xmlfile==2.0.0
 filetype==1.2.0
 lxml==6.1.0
